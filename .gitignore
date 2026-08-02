@@ -1,0 +1,10 @@
+# Obsidian local workspace state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian transient files
+.trash/
+
+# OS files
+Thumbs.db
+Desktop.ini
