@@ -18,7 +18,8 @@
 |---|---|---|---|---:|---|---:|---:|---|---|---|
 | Aug 2026 | OpenAI | ChatGPT Plus | Subscription | To enter from invoice | Invoice currency | To review | To review | AlistraGIS architecture, debugging, technical design, R&D records, implementation handovers | OpenAI invoice + dated conversations | Do not estimate per-token value for subscription-included usage |
 | Aug 2026 | OpenAI | Codex / flexible usage | Included usage / credits | To enter | Invoice currency | To review | To review | AlistraGIS code implementation, review, debugging and refactoring | OpenAI/Codex usage or credit receipt + GitHub commits | Separate included usage from purchased credits |
-| Aug 2026 | Anthropic | Claude / Claude Code | Subscription / usage / credits | To enter from invoice | Invoice currency | To review | To review | AlistraGIS implementation, code review, refactoring, testing and architecture | Anthropic invoice/usage + GitHub commits | Record actual subscription and any extra usage separately |
+| 2026-08-07 | Anthropic | Claude / Claude Code | Paid usage / credits | 24.00 | GBP | 100% development pending evidence review | To review | Accelerated AlistraGIS implementation, including vehicles, equipment and employees work plus code refactoring/debugging | User-reported spend; retain Anthropic receipt/usage record | Actual spend reported on 7 Aug 2026; evidence receipt still to attach |
+| Aug 2026 | Anthropic | Claude / Claude Code | Subscription / other usage | To enter from invoice | Invoice currency | To review | To review | AlistraGIS implementation, code review, refactoring, testing and architecture | Anthropic invoice/usage + GitHub commits | Record other subscription/usage separately from the £24 entry above |
 | Aug 2026 | GitHub | GitHub plan / development services | Subscription | To enter from invoice | Invoice currency | To review | To review | Source control, vault, CI/development workflow | GitHub invoice/billing | Split any clearly non-development use if material |
 | Aug 2026 | Vercel | Hosting / build / deployment | Subscription / usage | To enter from invoice | Invoice currency | To review | To review | Development, preview and test deployments | Vercel invoice + deployment records | Separate development/test from future live-customer hosting |
 | Aug 2026 | Google / Firebase | Firebase / Google Cloud | Usage | To enter from billing export | Invoice currency | To review | To review | Auth, Firestore, Storage, Functions, test data, development | Firebase/GCP billing export | Apportion live/business use if introduced |
@@ -34,8 +35,8 @@ Use this table for API, purchased credits or other metered AI usage where an act
 
 | Date / period | Provider | Product / model | Usage type | Input tokens | Output tokens | Other usage | Actual charged cost | Currency | Alistra workstream | Evidence |
 |---|---|---|---|---:|---:|---|---:|---|---|---|
+| 2026-08-07 | Anthropic | Claude / Claude Code | Paid usage / credits | To obtain if available | To obtain if available | Intensive implementation/refactoring session | 24.00 | GBP | Vehicles, equipment and employees implementation; debugging/refactoring | Anthropic receipt/usage export to attach |
 | | OpenAI | | API / credits | | | | | | | |
-| | Anthropic | | API / credits | | | | | | | |
 
 For subscription products such as ChatGPT Plus or a Claude subscription, record the subscription invoice in the Master Cost Register. Token counts may be retained as usage evidence if the provider exposes them, but do not manufacture a notional token charge where there was no separate token invoice.
 
@@ -43,7 +44,16 @@ For subscription products such as ChatGPT Plus or a Claude subscription, record 
 
 | Date / period | Person | Workstream | Activity | Actual hours | Technical R&D hours | Qualifying indirect hours | Non-R&D/product/commercial hours | Evidence | Review status |
 |---|---|---|---|---:|---:|---:|---:|---|---|
+| 2026-08-07 | Alistair Grantham | Vehicles / equipment / employees implementation and code quality | Implementation work on vehicles, equipment and employees; extensive refactoring and debugging of buggy code; AI-assisted implementation using Claude | 10.5 hours elapsed from 09:00 to approximately 19:30, before deducting breaks/non-working time | To review | To review | To review | User contemporaneous record; Claude usage; GitHub commits/changes to link | Treat 10.5h as elapsed session window, not final claimable hours; reconcile breaks and qualifying technical work before costing |
 | 2026-08-05 to 2026-08-07 | Alistair Grantham | Commercial GIS / spatial takeoff / API architecture | Duct/sub-duct billing model; commercial area takeoff; sundries/recipes; stock rules; package lifecycle; exports; API boundaries | To confirm | To review | To review | To review | Dated ChatGPT sessions; R&D Engineering Journal; implementation commits to follow | Reconcile actual hours before cost calculation |
+
+## Refactoring / Defect-Resolution Time Backlog
+
+A substantial amount of AlistraGIS development time has been spent refactoring and correcting buggy code. Do not assign unsupported historic hours. Reconstruct this time from GitHub commit history, PRs, AI coding sessions, dated conversations and other contemporaneous records where possible.
+
+| Period | Activity | Hours | Evidence to reconstruct | R&D/accounting treatment |
+|---|---|---:|---|---|
+| Historic through 2026-08-07 | Refactoring, defect correction, inconsistent logic removal, duplicate-code removal, warnings/errors and stability work across AlistraGIS | To reconstruct | GitHub commits/PRs, Codex/Claude sessions, ChatGPT discussions, CI/build logs | Review work item-by-item; routine bug fixing may differ from work directly addressing technological uncertainty |
 
 ## Cloud and Hosting Detail
 
@@ -97,8 +107,8 @@ At each month end:
 
 | Category | Actual spend | Development allocation | Potential R&D amount | Evidence complete? |
 |---|---:|---:|---:|---|
-| AI tools | | | | No |
-| Developer/director time | | | | No |
+| AI tools | £24.00 confirmed so far, plus invoices/other usage to add | To review | To review | Partial |
+| Developer/director time | Hours recorded/reconciliation pending | To review | To review | Partial |
 | GitHub / source control | | | | No |
 | Cloud / hosting | | | | No |
 | Mapping / geospatial | | | | No |
@@ -106,7 +116,7 @@ At each month end:
 | Hardware / software | | | | No |
 | Professional fees | | | | No |
 | Other | | | | No |
-| **Total** | | | | |
+| **Total cash spend currently evidenced/reported** | **£24.00 + outstanding invoices** | | | Partial |
 
 ## Important Note
 
