@@ -27,6 +27,55 @@ AlistraGIS is intended to provide a single operational platform for telecom netw
 
 ## Engineering journal entries
 
+### 2026-07-22 to 2026-08-07 — GitHub-evidenced development stream from duct/sub-duct creation onward
+
+**Workstream**  
+Duct/sub-duct modelling, cable containment, field/mobile delivery, data integrity, performance, security, refactoring, operational management and commercial-GIS foundations.
+
+**Evidence basis**  
+GitHub source-control history in `finchygoldtail/AlistraGIS`. Commit timestamps prove development activity at specific points but do not, by themselves, prove continuous working hours between commits. The detailed day-by-day evidence record is maintained in `R&D/GitHub Development Evidence Timeline.md`.
+
+**Duct/sub-duct origin — 22 July 2026**  
+Commit `73fd9b47` — **Add duct and sub-duct route workflow** — introduced duct as a mapped line asset, duct count/diameter/use, cable-to-duct linking and generation of child sub-duct records along duct geometry. Commit `7527ff13` followed by separating duct storage and layers.
+
+**23 July 2026**  
+Duct development continued through an evidenced commit window of approximately 15:58–19:39 with the duct designer, route visibility, workspace duct layer/menu/count fixes, overview visibility, duct click/edit behaviour and workspace editor wiring.
+
+**24 July 2026**  
+A concentrated evidenced window of approximately 14:07–18:45 developed cable containment inside ducts/sub-ducts, assigned-cable display, routing along duct geometry, nested/leaf sub-duct rendering, cable reconciliation, duct capacity warnings and design visibility.
+
+**27–29 July 2026**  
+Further integration added duct counting into the asset register and route splitting/scoping at joints.
+
+**2–3 August 2026**  
+Work extended duct progress into production/completed sections and added route-splitting robustness, repeated-vertex handling, joint insertion from duct routes, coordinate normalisation, mobile duct workflows, QGIS metadata, mobile production classification fixes, network schematic enhancements, mobile/tablet field improvements and photo/evidence workflows.
+
+**4 August 2026**  
+Major reliability, performance and security work addressed silent photo/edit data loss, targeted per-asset writes instead of whole-project rewrites, Storage cleanup/compression, incremental exchange writes, viewport culling, KML import issues, snap throttling, duplicate audit writes, resumable uploads, persistent failed-upload recovery and server-managed audit-trail writes.
+
+**5 August 2026**  
+Large-scale refactoring and hardening across JointMapManager, ProjectWorkspace, UserManagementPanel, DistributionPointEditor, WorkspaceBuild, ExchangeDesigner, WorkspaceMap, AssetMarkersLayer, StreetCabDesigner and joint-map workspace handlers. A key commit (`9739be4d`) reduced `JointMapManager.tsx` from 4,077 to 2,875 lines and extracted the autosave, pending-save recovery, context-add handling, duct-joint insertion and approximately 527-line duct/sub-duct/cable creation workflow. Ticketing/helpdesk, high-severity audit fixes, permission hardening, dead-tab wiring and runtime crash fixes were also implemented.
+
+**6 August 2026**  
+Further map render/memoisation work, ticket hardening, QA/lifecycle/report fixes and the Plant & Equipment / Vehicle Management / Smart Work Pack implementation. Commit `cd8ca13f` records company-wide plant/equipment and vehicle registers with check-in/out, faults, inspections/services/calibration, compliance alerts, QR labels, CSV/Excel workflows, crews, documents and Work Pack lifecycle/readiness functionality. The commit records 151 passing unit tests and clean typecheck/build.
+
+**7 August 2026**  
+Development continued on supervisor role, single-session enforcement, employee credentials, vehicle QR scanning, fleet functionality, as-built generation, module entitlement filtering, User Register fixes, moving Plant/Vehicle/Employees into Management, batch import/security fixes, shared styling and additional Round 4 audit fixes. Alistair contemporaneously recorded starting work at 09:00 and working through the day; the cost/time register records a 10.5-hour elapsed window to approximately 19:30 pending break reconciliation.
+
+**What was learned**  
+The source-control trail shows that the duct/sub-duct model became a foundation for wider network, production, field, storage, topology and later commercial workflows. It also shows that substantial effort was required not just to add features but to remove entanglement, reduce unsafe write patterns, protect field data, improve large-map performance and harden permission/audit boundaries.
+
+**R&D treatment caution**  
+Not all commits or hours automatically qualify as R&D. Routine UI changes, normal feature development and ordinary bug fixing should be separated from work directly resolving technological uncertainty. GitHub evidence is used to corroborate activity and workstream, not to manufacture unsupported hours.
+
+**Evidence links**  
+- `R&D/GitHub Development Evidence Timeline.md`
+- `R&D/AI and Development Cost Register.md`
+- Repository commits including `73fd9b47`, `9739be4d`, `cd8ca13f`, `4626201e`, `905c8e96`, `39f91285`, `125262ad`
+- AI coding sessions and dated ChatGPT/Claude records where available
+
+---
+
 ### 2026-08-05 — R&D record structure established
 
 **Problem / uncertainty**  
@@ -101,7 +150,7 @@ A map polygon alone is insufficient for a commercially useful takeoff. The spati
 **Evidence links**  
 - Design record: ChatGPT development discussions dated 5–7 August 2026 covering AlistraGIS production/commercial architecture, duct/sub-duct billing, area takeoff, sundries, exports and API boundaries.
 - Vault: R&D Engineering Journal and related R&D registers.
-- Implementation evidence: to link when corresponding application commits/PRs and tests are available.
+- GitHub development evidence timeline: source-control backfill from 22 July onward.
 - Test output: pending implementation.
 - Invoice / cost record: R&D Costs — director/developer time to be populated from actual hours and remuneration basis.
 
