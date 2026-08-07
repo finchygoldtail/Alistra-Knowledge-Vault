@@ -43,6 +43,73 @@ Backfill one entry for every material development stream and link each entry to 
 
 ---
 
+### 2026-08-05 to 2026-08-07 — Duct/sub-duct billing model and map-driven commercial takeoff design
+
+**Workstream**  
+Commercial GIS, duct/sub-duct quantity modelling, BOQ/material derivation and API architecture.
+
+**Technical uncertainty**  
+The development work investigated how AlistraGIS could use the live GIS network as the commercial source of truth rather than requiring quantities to be rebuilt manually in spreadsheets. Key uncertainties included how duct and sub-duct quantities should be represented for billing, how arbitrary geographic selections should be converted into accurate quantities without counting entire assets that only partially cross a selected area, and how mapped primary assets could be expanded into the non-mapped sundries required for a realistic BOQ.
+
+**Baseline / existing capability**  
+AlistraGIS already contained substantial surrounding capability including mapped fibre assets, commercial/BOQ direction, stock functionality, production information, build-partner concepts, reporting and rate-card functionality. The missing connection was a reliable map-area selection and spatial takeoff layer that could feed those existing systems. A simple asset count would also omit materials such as joint glands, MOBRA arms, Kit 1A, splice trays, mounting hardware, couplers, plugs, labels and other sundries.
+
+**Hypothesis or proposed advance**  
+Use a selected or user-drawn GIS polygon to create a deterministic commercial takeoff. Point assets would be included by spatial relationship; linear assets such as duct, sub-duct and cable would be clipped to the commercial boundary and only the geometry inside the polygon would be measured. Primary asset quantities would then pass through a configurable, versioned asset-recipe/material engine to derive sundries before using existing stock, BOQ and rate-card functionality.
+
+**Work performed**  
+- Developed the duct and sub-duct billing concept so mapped route quantities can support commercial measurement.
+- Defined a commercial area-selection workflow using either existing project/AG polygons or temporary user-drawn polygons.
+- Defined spatial clipping requirements for duct, sub-duct, cable and other linear assets so partial intersections are measured rather than charging the full parent asset.
+- Defined point-asset inclusion and manual inclusion/exclusion behaviour for chambers, joints, poles, DPs/CBTs and premises.
+- Identified the need for duplicate-scope protection so the same asset or overlapping linear segment is not inadvertently allocated to multiple active subcontract packages.
+- Designed an Asset Recipe / Sundries Matrix to convert primary assets into full material requirements, including joint closures, MOBRA arms, gland kits, Kit 1A, splice trays, mounting kits, labels, fixings, duct couplers/plugs, draw rope and configurable consumables.
+- Defined recipe rule types including exact quantity, per asset, per cable entry, per metre, conditional/variant rules, percentage allowances and manual allowances.
+- Defined recipe versioning so later recipe changes cannot alter historical issued packages.
+- Defined material-specific waste, pack/drum rounding and procurement quantities separately from the raw design requirement.
+- Defined client-supplied, build-partner-supplied, free-issue, included-in-rate and separately chargeable material ownership states to reduce double charging.
+- Defined stock reservation against awarded commercial packages.
+- Defined Estimated, Contracted, Actual and Certified commercial values as separate lifecycle states so production completion does not itself authorise payment.
+- Defined immutable commercial-package snapshots containing the polygon, included/excluded asset references, quantities, recipe version, rate-card version and commercial totals.
+- Defined manual quantity overrides with retention of original calculated quantity, reason, user and timestamp.
+- Designed variation records and advisory comparison between contracted snapshots and current as-built/production data to identify potential changes without automatically creating or approving claims.
+- Designed comparison of multiple build-partner rate cards against one takeoff before award.
+- Defined Excel export requirements using the saved commercial snapshot, with sheets for summary, primary assets, materials/sundries, stock requirement, BOQ/rate card, build-partner cost, client billing, margin, overrides/audit and variations.
+- Defined PDF and map-scope export concepts for subcontract issue/approval packs.
+- Reviewed API boundaries and selected a bounded-service approach: Commercial Takeoff, Materials/Recipes and Commercial Packages as distinct logical responsibilities, while extending existing Stock/BOQ and Reports capabilities rather than duplicating them. Logical API boundaries do not require separate deployments.
+- Added implementation safeguards covering geometry accuracy, duplicate counting, historic version locking, permissions, excessive reads/writes, audit-log volume, concurrency and large-dataset performance.
+
+**Result**  
+Design/architecture stage completed for the commercial takeoff capability. The work established a route from live GIS geometry to commercial quantities and a method for including derived sundries that are not themselves drawn on the map. Implementation and validation remain outstanding.
+
+**What was learned**  
+A map polygon alone is insufficient for a commercially useful takeoff. The spatial takeoff must distinguish point and linear geometry, clip partial lines accurately, prevent overlapping commercial allocation, and then expand mapped assets through versioned recipes. Historical commercial packages also require frozen calculation inputs; recalculating an old package from current GIS, recipe or rate-card data would make the commercial record non-reproducible.
+
+**Remaining uncertainty**  
+- Accuracy and performance of polygon/line clipping against large real-world project datasets.
+- Boundary rules for points lying exactly on a polygon edge.
+- Robust detection of overlapping portions of the same linear asset across active packages.
+- Final business recipe quantities for each joint/chamber/duct/cable variant.
+- Correct handling of cable drum, duct bundle and other supplier-specific order rounding.
+- Integration details with the current production, BOQ, stock, rate-card and reporting implementations after repository inspection.
+- Permission model for commercially sensitive rates, costs and margin.
+
+**People involved and time spent**  
+- Alistair Grantham — product definition, telecom-domain rules, commercial workflow design, duct/sub-duct billing requirements, review and AI-assisted technical design.
+- Exact hours: **to be confirmed from actual working records/session history before being used for payroll, cost allocation or an R&D claim.** No unsupported hour estimate has been entered.
+
+**Evidence links**  
+- Design record: ChatGPT development discussions dated 5–7 August 2026 covering AlistraGIS production/commercial architecture, duct/sub-duct billing, area takeoff, sundries, exports and API boundaries.
+- Vault: R&D Engineering Journal and related R&D registers.
+- Implementation evidence: to link when corresponding application commits/PRs and tests are available.
+- Test output: pending implementation.
+- Invoice / cost record: R&D Costs — director/developer time to be populated from actual hours and remuneration basis.
+
+**Next action**  
+Implement against the existing AlistraGIS architecture after repository inspection, then record actual development/test time separately from product/commercial planning time. Add spatial unit tests, material-recipe tests, version-lock tests, permission tests and export reproducibility tests. Link the resulting commits, test evidence and deployment records back to this entry.
+
+---
+
 ### Historical workstreams to backfill
 
 Create dated entries for the following workstreams using the template below:
