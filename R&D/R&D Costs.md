@@ -23,6 +23,15 @@
 | Date | Supplier / person | Cost category | Description | Gross cost | R&D allocation % | Potential R&D amount | Workstream | Evidence reference | Status / notes |
 |---|---|---|---|---:|---:|---:|---|---|---|
 | 2026-08-05 | Alistair Grantham | Director / developer time | Establish R&D evidence framework and registers | To calculate | To review | To calculate | R&D governance and evidence | R&D Engineering Journal entry 2026-08-05 | Record actual hours and remuneration basis |
+| 2026-08-05 to 2026-08-07 | Alistair Grantham | Director / developer time | Duct/sub-duct billing model; map-driven commercial takeoff; spatial clipping requirements; asset recipe/sundries model; stock/waste/reservation rules; commercial package lifecycle; variations; Excel/PDF/map export design; API boundary design and technical risk review | To calculate | To review | To calculate | Commercial GIS / spatial takeoff / API architecture | R&D Engineering Journal entry 2026-08-05 to 2026-08-07 | Actual hours not yet evidenced. Record from working/session records before any cost or R&D claim calculation; separate qualifying technical investigation from routine commercial/product planning. |
+
+## Development time awaiting reconciliation
+
+The following recent AlistraGIS work has been identified for time reconstruction. This section is an evidence queue, not a claim of hours.
+
+| Period | Person | Work identified | Hours | Evidence status | Allocation note |
+|---|---|---|---:|---|---|
+| 2026-08-05 to 2026-08-07 | Alistair Grantham | Duct and sub-duct commercial/billing modelling; commercial map-area takeoff; spatial line clipping; derived material/sundry recipes; recipe/version locking; stock waste and reservation; package snapshots; Estimated/Contracted/Actual/Certified lifecycle; duplicate allocation protection; build-partner rate comparison; variation/change detection; XLSX/PDF/map export requirements; bounded API/service architecture | To confirm | ChatGPT design-session evidence identified; application commit/test evidence to link as implementation proceeds | Split technical R&D investigation/testing from routine product definition, pricing/commercial administration and other non-qualifying work before adviser review |
 
 ## Categories to track
 
@@ -112,6 +121,7 @@ At the end of each month:
 | API and multi-tenant architecture | | | Not started | |
 | Security, audit and data integrity | | | Not started | |
 | Automated network design | | | Not started | |
+| Commercial GIS and spatial takeoff | | | Time/work identified; hours pending reconciliation | Adviser review required |
 
 ## Adviser review questions
 
