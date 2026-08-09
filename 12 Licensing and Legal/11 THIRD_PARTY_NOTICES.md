@@ -1,0 +1,245 @@
+---
+status: live
+updated: 2026-08-08
+related: ["[[10 Third Party Licence Register]]", "[[Intellectual Property]]"]
+---
+
+# Third Party Notices
+
+This product includes third-party open-source software. This file lists every production (runtime-shipped) dependency of fibre-gis's frontend, its licence, and a link to its source repository, generated automatically from `package-lock.json` on 2026-08-08 (`license-checker-rseidelsohn`, production dependencies only — build/test-only tooling like TypeScript, ESLint and Vite's dev toolchain is excluded since it never ships to end users). AlistraGIS's `map-frontend` has the same runtime dependency set.
+
+See [[10 Third Party Licence Register]] for the three entries here that need a closer look before commercial go-live (`leaflet-rotate` — GPL-3.0, `react-leaflet`/`@react-leaflet/core` — Hippocratic-2.1, `@mapbox/jsonlint-lines-primitives` — undeclared licence) and for a note on the security-vulnerability status of these same packages, which is a separate concern from licensing and not repeated here.
+
+Full licence text for every package below is available on request from its linked repository, or via the local `node_modules/<package>/LICENSE` file at build time.
+
+## Production dependencies
+
+- [@babel/runtime@7.28.4](https://github.com/babel/babel) - MIT
+- [@bkrem/react-transition-group@1.3.5](https://github.com/bkrem/react-transition-group) - BSD-3-Clause
+- [@esbuild/win32-x64@0.28.2](https://github.com/evanw/esbuild) - MIT
+- [@firebase/ai@2.13.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/analytics-compat@0.2.28](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/analytics-types@0.8.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/analytics@0.10.22](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app-check-compat@0.4.5](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app-check-interop-types@0.3.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app-check-types@0.5.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app-check@0.12.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app-compat@0.5.15](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app-types@0.9.5](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/app@0.15.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/auth-compat@0.6.8](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/auth-interop-types@0.2.5](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/auth-types@0.13.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/auth@1.13.3](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/component@0.7.3](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/data-connect@0.7.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/database-compat@2.1.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/database-types@1.0.20](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/database@1.1.3](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/firestore-compat@0.4.11](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/firestore-types@3.0.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/firestore@4.16.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/functions-compat@0.4.5](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/functions-types@0.6.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/functions@0.13.5](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/installations-compat@0.2.22](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/installations-types@0.5.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/installations@0.6.22](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/logger@0.5.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/messaging-compat@0.2.27](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/messaging-interop-types@0.2.5](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/messaging@0.13.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/performance-compat@0.2.25](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/performance-types@0.2.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/performance@0.7.12](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/remote-config-compat@0.2.27](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/remote-config-types@0.5.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/remote-config@0.9.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/storage-compat@0.4.3](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/storage-types@0.8.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/storage@0.14.3](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/util@1.15.1](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@firebase/webchannel-wrapper@1.0.6](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [@grpc/grpc-js@1.9.16](https://github.com/grpc/grpc-node.git#master) - Apache-2.0
+- [@grpc/proto-loader@0.7.15](https://github.com/grpc/grpc-node) - Apache-2.0
+- [@mapbox/jsonlint-lines-primitives@2.0.2](https://github.com/mapbox/jsonlint) - UNKNOWN (see [[10 Third Party Licence Register]])
+- [@mapbox/point-geometry@1.1.0](https://github.com/mapbox/point-geometry) - ISC
+- [@mapbox/tiny-sdf@2.2.0](https://github.com/mapbox/tiny-sdf) - BSD-2-Clause
+- [@mapbox/unitbezier@0.0.1](https://github.com/mapbox/unitbezier) - BSD-2-Clause
+- [@mapbox/vector-tile@2.0.4](https://github.com/mapbox/vector-tile-js) - BSD-3-Clause
+- [@mapbox/whoots-js@3.1.0](https://github.com/mapbox/whoots-js) - ISC
+- [@maplibre/geojson-vt@5.0.4](https://github.com/maplibre/geojson-vt) - ISC
+- [@maplibre/geojson-vt@6.1.0](https://github.com/maplibre/geojson-vt) - ISC
+- [@maplibre/maplibre-gl-style-spec@24.8.5](https://github.com/maplibre/maplibre-style-spec) - ISC
+- [@maplibre/mlt@1.1.9](https://github.com/maplibre/maplibre-tile-spec) - (MIT OR Apache-2.0)
+- [@maplibre/vt-pbf@4.3.0](https://github.com/maplibre/vt-pbf) - MIT
+- [@protobufjs/aspromise@1.1.2](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/base64@1.1.2](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/codegen@2.0.5](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/eventemitter@1.1.1](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/fetch@1.1.1](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/float@1.0.2](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/path@1.1.2](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/pool@1.1.0](https://github.com/dcodeIO/protobuf.js) - BSD-3-Clause
+- [@protobufjs/utf8@1.1.2](https://github.com/protobufjs/protobuf.js) - BSD-3-Clause
+- [@react-leaflet/core@3.0.0](https://github.com/PaulLeCam/react-leaflet) - Hippocratic-2.1 (see [[10 Third Party Licence Register]])
+- [@rollup/rollup-win32-x64-gnu@4.62.4](https://github.com/rollup/rollup) - MIT
+- [@rollup/rollup-win32-x64-msvc@4.62.4](https://github.com/rollup/rollup) - MIT
+- [@turf/* (turf.js modules, ~110 packages)@7.3.5](https://github.com/Turfjs/turf) - MIT
+- [@turf/jsts@2.7.2](https://github.com/turfjs/turf-jsts) - (EDL-1.0 OR EPL-1.0)
+- [@types/* (TypeScript type definitions, various)](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [adler-32@1.2.0 / 1.3.1](https://github.com/SheetJS/js-adler32) - Apache-2.0
+- [ansi-regex@5.0.1](https://github.com/chalk/ansi-regex) - MIT
+- [ansi-styles@4.3.0](https://github.com/chalk/ansi-styles) - MIT
+- [anymatch@3.1.3](https://github.com/micromatch/anymatch) - ISC
+- [arc@0.2.0](https://github.com/springmeyer/arc.js) - BSD
+- [base64-arraybuffer@1.0.2](https://github.com/niklasvh/base64-arraybuffer) - MIT
+- [bignumber.js@9.3.1](https://github.com/MikeMcl/bignumber.js) - MIT
+- [binary-extensions@2.3.0](https://github.com/sindresorhus/binary-extensions) - MIT
+- [braces@3.0.3](https://github.com/micromatch/braces) - MIT
+- [camelcase@5.3.1](https://github.com/sindresorhus/camelcase) - MIT
+- [canvg@3.0.11](https://github.com/canvg/canvg) - MIT
+- [cfb@1.2.2](https://github.com/SheetJS/js-cfb) - Apache-2.0
+- [chain-function@1.0.1](https://github.com/jquense/chain-function) - MIT
+- [chokidar@3.6.0](https://github.com/paulmillr/chokidar) - MIT
+- [cliui@6.0.0 / 8.0.1](https://github.com/yargs/cliui) - ISC
+- [clone@2.1.2](https://github.com/pvorb/node-clone) - MIT
+- [codepage@1.14.0 / 1.15.0](https://github.com/SheetJS/js-codepage) - Apache-2.0
+- [color-convert@2.0.1](https://github.com/Qix-/color-convert) - MIT
+- [color-name@1.1.4](https://github.com/colorjs/color-name) - MIT
+- [commander@2.14.1 / 2.17.1](https://github.com/tj/commander.js) - MIT
+- [concaveman@1.2.1](https://github.com/mapbox/concaveman) - ISC
+- [core-js@3.47.0](https://github.com/zloirock/core-js) - MIT
+- [crc-32@1.2.2](https://github.com/SheetJS/js-crc32) - Apache-2.0
+- [css-line-break@2.1.0](https://github.com/niklasvh/css-line-break) - MIT
+- [d3-array/color/dispatch/drag/ease/geo/hierarchy/interpolate/path/selection/shape/timer/transition/voronoi/zoom (various)](https://github.com/d3) - BSD-3-Clause / ISC
+- [decamelize@1.2.0](https://github.com/sindresorhus/decamelize) - MIT
+- [dequal@2.0.3](https://github.com/lukeed/dequal) - MIT
+- [dijkstrajs@1.0.3](https://github.com/tcort/dijkstrajs) - MIT
+- [dom-helpers@3.4.0](https://github.com/jquense/dom-helpers) - MIT
+- [dompurify@3.4.13](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
+- [earcut@2.2.4 / 3.0.2](https://github.com/mapbox/earcut) - ISC
+- [emoji-regex@8.0.0](https://github.com/mathiasbynens/emoji-regex) - MIT
+- [esbuild@0.28.2](https://github.com/evanw/esbuild) - MIT
+- [escalade@3.2.0](https://github.com/lukeed/escalade) - MIT
+- [exit-on-epipe@1.0.1](https://github.com/SheetJS/node-exit-on-epipe) - Apache-2.0
+- [fast-deep-equal@3.1.3](https://github.com/epoberezkin/fast-deep-equal) - MIT
+- [fast-png@6.4.0](https://github.com/image-js/fast-png) - MIT
+- [faye-websocket@0.11.4](https://github.com/faye/faye-websocket-node) - Apache-2.0
+- [fdir@6.5.0](https://github.com/thecodrr/fdir) - MIT
+- [fflate@0.3.11 / 0.8.2](https://github.com/101arrowz/fflate) - MIT
+- [fill-range@7.1.1](https://github.com/jonschlinkert/fill-range) - MIT
+- [find-up@4.1.0](https://github.com/sindresorhus/find-up) - MIT
+- [firebase@12.16.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [frac@1.1.2](https://github.com/SheetJS/frac) - Apache-2.0
+- [geojson-equality-ts@1.0.2](https://github.com/smallsaucepan/geojson-equality-ts) - MIT
+- [geojson-polygon-self-intersections@1.2.2](https://github.com/mclaeysb/geojson-polygon-self-intersections) - MIT
+- [get-caller-file@2.0.5](https://github.com/stefanpenner/get-caller-file) - ISC
+- [gl-matrix@3.4.4](https://github.com/toji/gl-matrix) - MIT
+- [glob-parent@5.1.2](https://github.com/gulpjs/glob-parent) - ISC
+- [html2canvas@1.4.1](https://github.com/niklasvh/html2canvas) - MIT
+- [http-parser-js@0.5.10](https://github.com/creationix/http-parser-js) - MIT
+- [idb@7.1.1](https://github.com/jakearchibald/idb) - ISC
+- [iobuffer@5.4.0](https://github.com/image-js/iobuffer) - MIT
+- [is-binary-path@2.1.0](https://github.com/sindresorhus/is-binary-path) - MIT
+- [is-extglob@2.1.1](https://github.com/jonschlinkert/is-extglob) - MIT
+- [is-fullwidth-code-point@3.0.0](https://github.com/sindresorhus/is-fullwidth-code-point) - MIT
+- [is-glob@4.0.3](https://github.com/micromatch/is-glob) - MIT
+- [is-number@7.0.0](https://github.com/jonschlinkert/is-number) - MIT
+- [js-tokens@4.0.0](https://github.com/lydell/js-tokens) - MIT
+- [json-stringify-pretty-compact@4.0.0](https://github.com/lydell/json-stringify-pretty-compact) - MIT
+- [jspdf@3.0.4](https://github.com/parallax/jsPDF) - MIT (see [[10 Third Party Licence Register]] for its open security CVEs — a licensing/security distinction)
+- [jsts@2.7.1](https://github.com/bjornharrtell/jsts) - (EDL-1.0 OR EPL-1.0)
+- [kdbush@4.0.2](https://github.com/mourner/kdbush) - ISC
+- [leaflet-rotate@0.2.8](https://github.com/Raruto/leaflet-rotate) - **GPL-3.0 — see [[10 Third Party Licence Register]], needs legal review**
+- [leaflet.markercluster@1.5.3](https://github.com/Leaflet/Leaflet.markercluster) - MIT
+- [leaflet@1.9.4](https://github.com/Leaflet/Leaflet) - BSD-2-Clause
+- [locate-path@5.0.0](https://github.com/sindresorhus/locate-path) - MIT
+- [lodash.camelcase@4.3.0](https://github.com/lodash/lodash) - MIT
+- [long@5.3.2](https://github.com/dcodeIO/long.js) - Apache-2.0
+- [loose-envify@1.4.0](https://github.com/zertosh/loose-envify) - MIT
+- [maplibre-gl@5.24.0](https://github.com/maplibre/maplibre-gl-js) - BSD-3-Clause
+- [minimist@1.2.8](https://github.com/minimistjs/minimist) - MIT
+- [murmurhash-js@1.0.0](https://github.com/mikolalysenko/murmurhash-js) - MIT
+- [nanoid@3.3.18](https://github.com/ai/nanoid) - MIT
+- [normalize-path@3.0.0](https://github.com/jonschlinkert/normalize-path) - MIT
+- [object-assign@4.1.1](https://github.com/sindresorhus/object-assign) - MIT
+- [p-limit@2.3.0 / p-locate@4.1.0 / p-map@7.0.4 / p-try@2.2.0](https://github.com/sindresorhus) - MIT
+- [pako@2.1.0](https://github.com/nodeca/pako) - (MIT AND Zlib)
+- [path-exists@4.0.0](https://github.com/sindresorhus/path-exists) - MIT
+- [pbf@4.0.1](https://github.com/mapbox/pbf) - BSD-3-Clause
+- [performance-now@2.1.0](https://github.com/braveg1rl/performance-now) - MIT
+- [picocolors@1.1.1](https://github.com/alexeyraspopov/picocolors) - ISC
+- [picomatch@2.3.2 / 4.0.5](https://github.com/micromatch/picomatch) - MIT
+- [pngjs@5.0.0](https://github.com/lukeapage/pngjs) - MIT
+- [point-in-polygon-hao@1.2.4](https://github.com/rowanwins/point-in-polygon-hao) - MIT
+- [point-in-polygon@1.1.0](https://github.com/substack/point-in-polygon) - MIT
+- [polyclip-ts@0.16.8](https://github.com/luizbarboza/polyclip-ts) - MIT
+- [postcss@8.5.26](https://github.com/postcss/postcss) - MIT
+- [potpack@2.1.0](https://github.com/mapbox/potpack) - ISC
+- [printj@1.1.2](https://github.com/SheetJS/printj) - Apache-2.0
+- [prop-types@15.8.1](https://github.com/facebook/prop-types) - MIT
+- [protobufjs@7.6.5](https://github.com/protobufjs/protobuf.js) - BSD-3-Clause
+- [protocol-buffers-schema@3.6.1](https://github.com/mafintosh/protocol-buffers-schema) - MIT
+- [qrcode@1.5.4](https://github.com/soldair/node-qrcode) - MIT
+- [quickselect@1.1.1 / 2.0.0 / 3.0.0](https://github.com/mourner/quickselect) - ISC
+- [raf@3.4.1](https://github.com/chrisdickinson/raf) - MIT
+- [rbush@2.0.2 / 3.0.1](https://github.com/mourner/rbush) - MIT
+- [re2js@0.4.3](https://github.com/le0pard/re2js) - MIT
+- [react-d3-tree@3.6.6](https://github.com/bkrem/react-d3-tree) - MIT
+- [react-dom@19.2.0](https://github.com/facebook/react) - MIT
+- [react-is@16.13.1](https://github.com/facebook/react) - MIT
+- [react-leaflet-cluster@4.1.3](https://github.com/akursat/react-leaflet-cluster) - MIT (license file present but non-standard package.json field — verified by reading the file directly)
+- [react-leaflet-markercluster@5.0.0-rc.0](https://github.com/YUzhva/react-leaflet-markercluster) - MIT
+- [react-leaflet@5.0.0](https://github.com/PaulLeCam/react-leaflet) - **Hippocratic-2.1 — see [[10 Third Party Licence Register]]**
+- [react-lifecycles-compat@3.0.4](https://github.com/reactjs/react-lifecycles-compat) - MIT
+- [react@19.2.0](https://github.com/facebook/react) - MIT
+- [readdirp@3.6.0](https://github.com/paulmillr/readdirp) - MIT
+- [regenerator-runtime@0.13.11](https://github.com/facebook/regenerator.git#main) - MIT
+- [require-directory@2.1.1](https://github.com/troygoode/node-require-directory) - MIT
+- [require-main-filename@2.0.0](https://github.com/yargs/require-main-filename) - ISC
+- [resolve-protobuf-schema@2.1.0](https://github.com/mafintosh/resolve-protobuf-schema) - MIT
+- [rgbcolor@1.0.1](https://github.com/yetzt/node-rgbcolor) - MIT
+- [robust-predicates@2.0.4 / 3.0.3](https://github.com/mourner/robust-predicates) - Unlicense
+- [rollup@4.62.4](https://github.com/rollup/rollup) - MIT
+- [safe-buffer@5.2.1](https://github.com/feross/safe-buffer) - MIT
+- [scheduler@0.27.0](https://github.com/facebook/react) - MIT
+- [set-blocking@2.0.0](https://github.com/yargs/set-blocking) - ISC
+- [skmeans@0.9.7](https://github.com/solzimer/skmeans) - MIT
+- [source-map-js@1.2.1](https://github.com/7rulnik/source-map-js) - BSD-3-Clause
+- [splaytree-ts@1.0.2](https://github.com/SBanksX/splaytree-ts) - BSD
+- [ssf@0.11.2](https://github.com/SheetJS/ssf) - Apache-2.0
+- [stackblur-canvas@2.7.0](https://github.com/flozz/StackBlur) - MIT
+- [string-width@4.2.3](https://github.com/sindresorhus/string-width) - MIT
+- [strip-ansi@6.0.1](https://github.com/chalk/strip-ansi) - MIT
+- [supercluster@8.0.1](https://github.com/mapbox/supercluster) - ISC
+- [svg-pathdata@6.0.3](https://github.com/nfroidure/svg-pathdata) - MIT
+- [sweepline-intersections@1.5.0](https://github.com/rowanwins/sweepline-intersections) - MIT
+- [text-segmentation@1.0.3](https://github.com/niklasvh/text-segmentation) - MIT
+- [tinyglobby@0.2.15](https://github.com/SuperchupuDev/tinyglobby) - MIT
+- [tinyqueue@2.0.3 / 3.0.0](https://github.com/mourner/tinyqueue) - ISC
+- [to-regex-range@5.0.1](https://github.com/micromatch/to-regex-range) - MIT
+- [topojson-client@3.1.0 / topojson-server@3.0.1](https://github.com/topojson) - ISC
+- [tslib@2.8.1](https://github.com/Microsoft/tslib) - 0BSD
+- [undici-types@7.16.0](https://github.com/nodejs/undici) - MIT
+- [utrie@1.0.2](https://github.com/niklasvh/utrie) - MIT
+- [uuid@8.3.2](https://github.com/uuidjs/uuid) - MIT
+- [vite-plugin-static-copy@3.1.4](https://github.com/sapphi-red/vite-plugin-static-copy) - MIT
+- [vite@7.3.6](https://github.com/vitejs/vite) - MIT
+- [warning@3.0.0](https://github.com/BerkeleyTrue/warning) - BSD-3-Clause
+- [web-vitals@4.2.4](https://github.com/GoogleChrome/web-vitals) - Apache-2.0
+- [websocket-driver@0.7.5 / websocket-extensions@0.1.4](https://github.com/faye) - Apache-2.0
+- [which-module@2.0.1](https://github.com/nexdrew/which-module) - ISC
+- [wmf@1.0.2 / word@0.3.0](https://github.com/SheetJS) - Apache-2.0
+- [wrap-ansi@6.2.0 / 7.0.0](https://github.com/chalk/wrap-ansi) - MIT
+- [xlsx-js-style@1.2.0](https://github.com/gitbrent/xlsx-js-style) - Apache-2.0
+- [xlsx@0.18.5](https://github.com/SheetJS/sheetjs) - Apache-2.0 (see [[10 Third Party Licence Register]] for its open security CVEs)
+- [y18n@4.0.3 / 5.0.8](https://github.com/yargs/y18n) - ISC
+- [yargs-parser@18.1.3 / 21.1.1](https://github.com/yargs/yargs-parser) - ISC
+- [yargs@15.4.1 / 17.7.3](https://github.com/yargs/yargs) - MIT
+
+## Data attribution (not code, still requires notice)
+
+- **caniuse-lite** browser compatibility data (bundled via the build toolchain, used by `browserslist`) — CC-BY-4.0, © [caniuse.com](https://caniuse.com) contributors.
+- Map basemap tiles: © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, © [CARTO](https://carto.com/attributions) (fibre-gis) and © [Esri](https://www.esri.com/) (reference overlay) — attributions are already rendered in-app on the map itself, not just here.
