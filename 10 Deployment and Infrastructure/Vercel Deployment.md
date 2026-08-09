@@ -4,7 +4,7 @@ type: infrastructure
 status: active
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-07
+updated: 2026-08-09
 tags: [vercel, deployment]
 ---
 
@@ -26,9 +26,12 @@ Confirmed the hard way on 2026-08-06: a frontend bug fix was deployed via `fireb
 
 **Rule of thumb**: frontend fix → `git push origin main`, full stop. `firebase deploy` is only ever needed for `--only functions` or `--only firestore:rules`.
 
+## 2026-08-09 production release
+
+Commit `7ac3b4d` (`Add safe mobile production completion workflow`) was pushed to GitHub `main`. Vercel created production deployment `dpl_4cnBVZjicrjPbSH5NaCXWM9FnHWg`, reached `READY`, and aliased the release to `alistragis.com`, `www.alistragis.uk`, `alistragis.co.uk` and the Vercel production aliases. The frontend was not deployed through Firebase Hosting because that site remains redirect-only.
+
 ## Checks
 
 - Environment variables align with [[Firebase Infrastructure]].
 - Deployment status is linked from [[GitHub Workflow]].
 - Smoke tests cover [[Main Map]] and authentication.
-
