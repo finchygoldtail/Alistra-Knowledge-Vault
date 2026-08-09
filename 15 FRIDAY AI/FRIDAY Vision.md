@@ -1,7 +1,7 @@
 ---
 title: FRIDAY Vision
 type: friday
-status: draft
+status: parked
 owner: Alistair
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,9 @@ tags: [friday, ai]
 
 # FRIDAY Vision
 
-FRIDAY will become the AI assistant and platform knowledge agent for AlistraGIS.
+> **Current status:** FRIDAY is a parked, non-production prototype and is not part of the live AlistraGIS product. See [[FRIDAY AI - Parked Prototype]].
+
+FRIDAY may become a separately funded and licensed AI assistant for AlistraGIS at a later date. No commercial or production claim should be made until the required provider, cost, security, data and operational approvals are complete.
 
 ## Capabilities
 
@@ -18,4 +20,3 @@ FRIDAY will become the AI assistant and platform knowledge agent for AlistraGIS.
 - Help triage bugs through [[Bug Scanner]].
 - Support users as a [[Knowledge Assistant]].
 - Grow into [[Future Agents]] for focused work.
-

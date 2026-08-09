@@ -1,7 +1,7 @@
 ---
 title: FRIDAY AI Roadmap
 type: roadmap
-status: draft
+status: parked
 owner: Alistair
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,9 +10,11 @@ tags: [friday, ai, roadmap]
 
 # FRIDAY AI Roadmap
 
+> **Parked prototype:** FRIDAY is currently outside the production AlistraGIS application. The roadmap below is future planning only and does not describe a live product capability. See [[FRIDAY AI - Parked Prototype]].
+
 ## Direction
 
-FRIDAY will become the AlistraGIS AI assistant and platform knowledge agent, grounded in this vault and connected to implementation knowledge through [[Codex Backlog]].
+FRIDAY may become a separately funded and licensed AI assistant in the future. It must not be presented as an AlistraGIS production capability until licensing, cost, security, data handling and integration approvals are complete.
 
 ## Phases
 
@@ -26,4 +28,3 @@ FRIDAY will become the AlistraGIS AI assistant and platform knowledge agent, gro
 - [[Knowledge Assistant]]
 - [[Future Agents]]
 - [[Prompt Library]]
-
