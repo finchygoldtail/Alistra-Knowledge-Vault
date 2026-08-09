@@ -1,6 +1,6 @@
 # Privacy Notice and Website Legal Notices
 
-> **Draft for data-protection and solicitor review.** Complete this from an accurate data map before publication. Do not list purposes, providers or retention periods that do not match actual practice.
+> **Draft for data-protection and solicitor review.** Complete this from an accurate data map and the [[Data Retention Schedule]] before publication. Do not list purposes, providers or retention periods that do not match actual practice.
 
 # Part A — Privacy Notice
 

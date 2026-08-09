@@ -11,9 +11,9 @@
 ## Clearance work
 
 - [ ] Search the UK Intellectual Property Office database for identical and similar marks.
-- [ ] Search Companies House, domain names, app stores, search engines and relevant telecom/GIS markets.
+- [x] Search Companies House, domain names, app stores, search engines and relevant telecom/GIS markets.
 - [ ] Record similar marks and assess visual, phonetic and conceptual similarity.
-- [ ] Confirm that the mark is distinctive and not merely descriptive of the services.
+- [x] Confirm that the mark is distinctive and not merely descriptive of the services.
 - [ ] Obtain solicitor or trade-mark attorney advice before filing where conflicts exist.
 
 ## Likely commercial coverage to discuss with an adviser

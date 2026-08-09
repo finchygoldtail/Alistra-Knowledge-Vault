@@ -12,13 +12,13 @@
 
 ## Ownership controls
 
-- Domain registrar account owner: **[complete]**
+- Domain registrar account owner: complete
 - Legal registrant name: **[complete]**
 - Billing email: **[complete]**
-- Recovery email and telephone: **[complete]**
-- Multi-factor authentication enabled: **[yes/no]**
-- Automatic renewal enabled: **[yes/no]**
-- Renewal dates recorded in calendar: **[yes/no]**
+- Recovery email and telephone: complete
+- Multi-factor authentication enabled: yes
+- Automatic renewal enabled: yes
+- Renewal dates recorded in calendar: yes 31 may 2027
 - DNS administrator(s): **[complete]**
 
 ## Evidence to retain

@@ -24,6 +24,7 @@ AlistraGIS is API-first. Each API should document ownership, purpose, authentica
 - [[Topology API]]
 - [[Openreach API]]
 - [[Files API]]
+- [[Commercial API]]
 
 Use [[API Template]] for new API notes.
 
