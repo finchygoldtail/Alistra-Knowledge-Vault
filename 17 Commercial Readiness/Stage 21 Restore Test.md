@@ -1,6 +1,6 @@
 ---
-status: pending-first-backup
-updated: 2026-08-08
+status: passed
+updated: 2026-08-11
 stage: 21
 source: "[[Backup and Recovery]]"
 ---
@@ -27,13 +27,7 @@ Stage 21 control file for proving that the live backup configuration can restore
 
 ## Current Position
 
-The Firestore schedule was created on 2026-08-08 at 21:31 with 30-day retention. No scheduled backup was visible immediately afterward, so the restore test is pending the first available backup. PITR is enabled and reports a 7-day version retention period.
-
-Check for an available backup:
-
-```powershell
-gcloud firestore backups list --location=europe-west2 --project=fibre-gis-v2
-```
+Passed on 2026-08-11. Three scheduled backups were `READY`; the newest was restored into an isolated database, validated, and deleted after evidence was saved. Production was never overwritten or repointed.
 
 ## Test Procedure
 
@@ -55,7 +49,28 @@ gcloud firestore backups list --location=europe-west2 --project=fibre-gis-v2
 
 ## Result
 
-Pending. The first scheduled backup must exist before the restore test can be executed.
+Passed.
+
+| Item | Evidence |
+|---|---|
+| Source backup | `67b9c533-1534-46cc-8f0a-7c5127dbd641`, `READY` |
+| Snapshot | 2026-08-11 03:27:23.564022Z |
+| Isolated target | `restore-test-20260811` in `europe-west2` |
+| Started | 2026-08-11 17:19:53.885683Z |
+| Completed | 2026-08-11 17:30:21.778388Z |
+| Managed database restore duration | 627.893 seconds (10 minutes 27.893 seconds) |
+| Recovery-point gap at test start | 49,950.322 seconds (13 hours 52 minutes 30.322 seconds) |
+| Restore state | `SUCCESSFUL`, 100/100 |
+| Composite indexes | 16/16 `READY`; zero normalized definition differences from production |
+| Security checks | Target anonymous read returned HTTP 403; 23 Firestore and 10 Storage rules tests passed |
+| Production integrity | Original UID and update time unchanged; PITR enabled; three backups still `READY` |
+| Cleanup | Temporary database deleted at 2026-08-11 17:33:47.502787Z; source backup retained |
+
+Restored collection checks found 2 businesses, 29 user records, 96 map assets, 1 work pack, 1 ticket, 5 ticket events, 1,515 audit events and 206 asset change logs. Current production contained 101 map assets, 1,560 audit events and 221 asset change logs immediately after the restore; the differences are consistent with activity after the 03:27Z snapshot.
+
+The observed recovery point is inside the internal 24-hour target. The measured duration is the managed database restore time, not a contractual full-service RTO. Firestore backups do not contain Firebase Security Rules, so any retained restore target must have an approved non-production rules configuration applied before client testing.
+
+Detailed evidence: `C:\Projects\fibre-gis\docs\PHASE_20_21_RECOVERY_EVIDENCE_2026-08-11.md`.
 
 ## Related Files Reviewed
 

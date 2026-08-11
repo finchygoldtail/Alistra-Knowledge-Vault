@@ -1,10 +1,10 @@
 ---
 title: Backup and Recovery
 type: infrastructure
-status: draft
+status: implemented
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-08
+updated: 2026-08-11
 tags: [backup, recovery]
 ---
 
@@ -26,12 +26,12 @@ Stage 20 of the commercial go-live programme. This page records the backup imple
 |---|---|---|
 | Firestore | Enable point-in-time recovery for `(default)` database | Enabled live on 2026-08-08; Firestore reports 7-day version retention |
 | Firestore | Daily scheduled backups with defined retention | Enabled live on 2026-08-08; daily recurrence and 30-day retention |
-| Firestore | Restore into a non-production database first | Runbook defined; test not yet evidenced in vault |
-| Firebase Storage | Versioning or export/replication for uploaded files/photos/documents | Not verified |
+| Firestore | Restore into a non-production database first | Executed on 2026-08-11; see [[Stage 21 Restore Test]] |
+| Firebase Storage | Versioning or export/replication for uploaded files/photos/documents | Implemented: versioning and 30-day soft delete on source and backup buckets; daily append-only mirror verified |
 | Source/config | Repository contains rules, indexes, functions, frontend source and deployment config | Present in `fibre-gis` |
 | Secrets/config | Secret values kept out of repo and backed by provider controls | Covered by [[Secrets Audit 2026-08-08]]; console state not fully verified |
 | Company deletion backups | Manifest backup before destructive tenant deletion | Implemented in `backupAndDeleteCompany`; backup expiry not implemented |
-| Restore evidence | Timed restore test with result recorded | Not yet complete |
+| Restore evidence | Timed restore test with result recorded | Completed on 2026-08-11; see [[Stage 21 Restore Test]] |
 
 ## Live Verification
 
@@ -46,7 +46,22 @@ backupScheduleRetention: 2592000s
 backupScheduleRecurrence: daily
 ```
 
-Result: the live Firestore database has Point-in-Time Recovery enabled and a daily scheduled backup with 30-day retention. Firebase Storage backup/versioning still requires a separate live check, and restore evidence is not yet complete.
+Result: the live Firestore database has Point-in-Time Recovery enabled and a daily scheduled backup with 30-day retention.
+
+On 2026-08-11 the Storage controls were implemented and verified:
+
+```text
+source: gs://fibre-gis-v2.firebasestorage.app
+backup: gs://fibre-gis-v2-upload-backups
+location: US-EAST1 (both buckets)
+versioning: enabled (both buckets)
+soft delete: 30 days (both buckets)
+transfer job: transferJobs/12826903455118721046
+schedule: daily / 86400s
+mode: append-only; overwrite never; source deletes not propagated
+first run: SUCCESS, 8/8 objects, 19,155,778/19,155,778 bytes
+metadata comparison: 8/8 names, sizes and checksums matched
+```
 
 The earlier unauthenticated check from this machine was:
 
@@ -75,11 +90,11 @@ gcloud firestore backups schedules create \
   --project fibre-gis-v2
 ```
 
-Firestore backups do not include uploaded Firebase Storage files. Storage versioning, lifecycle/export policy and restore process must be configured and evidenced separately.
+Firestore backups do not include uploaded Firebase Storage files. The separate live mirror above covers uploaded photos and documents. Noncurrent versions expire after 30 days; live mirror objects are retained until the approved data-retention enforcement process removes them.
 
 ## Go-Live Position
 
-Backup requirements are documented, and the codebase contains some backup-related controls, but Stage 20 is **not fully passed** until the live Firestore backup/PITR state and Storage backup policy are confirmed from the cloud console/CLI and recorded with evidence.
+Stage 20 is implemented and evidenced. The remaining resilience improvements are cross-project/cross-region Storage replication and automated retention enforcement; these are not blockers to the completed backup implementation but must be resolved before making stronger contractual disaster-recovery or retention claims.
 
 ## Related
 
