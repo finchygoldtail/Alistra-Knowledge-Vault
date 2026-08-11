@@ -4,7 +4,7 @@ type: infrastructure
 status: active
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-09
+updated: 2026-08-11
 tags: [vercel, deployment]
 ---
 
@@ -29,6 +29,12 @@ Confirmed the hard way on 2026-08-06: a frontend bug fix was deployed via `fireb
 ## 2026-08-09 production release
 
 Commit `7ac3b4d` (`Add safe mobile production completion workflow`) was pushed to GitHub `main`. Vercel created production deployment `dpl_4cnBVZjicrjPbSH5NaCXWM9FnHWg`, reached `READY`, and aliased the release to `alistragis.com`, `www.alistragis.uk`, `alistragis.co.uk` and the Vercel production aliases. The frontend was not deployed through Firebase Hosting because that site remains redirect-only.
+
+## 2026-08-11 security release
+
+Commit `eeeab79` (`Harden tenant authentication and storage security`) was pushed to GitHub `main`. The Vercel commit status reached `success`, and `alistragis.com` served the release asset `/assets/index-BrwuoPL3.js`; the public landing page rendered without browser console errors.
+
+Firebase production project `fibre-gis-v2` was updated separately. Firestore and Storage rules compiled and released successfully, then all 128 application Functions were explicitly updated. The explicit function list preserved the already-deployed `fridayAiHealth` and `fridayChat` endpoints instead of accepting Firebase CLI's proposed deletion. Firebase reported `Deploy complete` after automatically retrying transient per-project mutation-quota responses. See [[Security Remediation 2026-08-11]].
 
 ## Checks
 

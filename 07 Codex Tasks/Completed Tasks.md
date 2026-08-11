@@ -4,7 +4,7 @@ type: codex
 status: active
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-07
+updated: 2026-08-11
 tags: [codex, completed]
 ---
 
@@ -12,6 +12,7 @@ tags: [codex, completed]
 
 ## Completed
 
+- 2026-08-11: Completed and deployed an adversarial security remediation covering authentication, tenant authorization, Storage access, Firebase rules, browser headers and vulnerable dependencies. Commit `eeeab79` is live through Vercel and Firebase project `fibre-gis-v2`; all existing FRIDAY endpoints were preserved. Verification included production builds, 277 application/security tests, 13 component tests, 33 emulator rules tests, TypeScript checks, zero known production dependency vulnerabilities in both npm trees, Vercel success status, and a live asset/browser smoke check. See [[Security Remediation 2026-08-11]].
 - 2026-08-07: Closed out Round 4 with the last two fixable findings — `stampUserSession`'s businessId validation gap and its silent `console.warn`-only failure. Re-traced `resolveStorageContext`'s platform-admin exemption logic (super_admin is the only role that switches business context, and it's already exempted from the same-company check that gate enforces) and confirmed routing `stampUserSession` through it doesn't actually risk the flow the first pass was cautious about — kept the `snapshot.exists` guard as a second check regardless. Added one automatic retry plus a louder `console.error` on repeated failure, still non-blocking by design. 10 of 19 Round 4 findings fixed; the rest are accepted architecture, need a real design decision (rate limiting), or aren't code bugs. See [[Active Bugs]] — this round is closed.
 - 2026-08-07: Worked through the remaining Round 4 audit findings — 6 more fixed (4 Medium, 2 Low), bringing the round's total to 8 of 19 fixed. See [[Active Bugs]] for the full breakdown.
 	- Fixed: `createdByUid`/`createdAt` spoofable on edits across employees/plant equipment/vehicles/crews — new `resolveCreationFields()` in `storageAccess.ts` reads the real stored value server-side on an edit instead of trusting client-supplied fields.
@@ -67,4 +68,3 @@ tags: [codex, completed]
 	- Fixed: four save-failure paths told the user a failed save was "safely backed up locally" without checking whether the local backup actually succeeded.
 	- Fixed (partial): added `vitest` + Testing Library to the repo (previously no component/rendering test coverage existed) and a `useStableCallback` hook, with a regression test, so the 17 callback props the map canvas passes into the marker/cable-line layers have a stable identity. Does not yet memoize `JointMapManager`'s ~800-property render-context object — see [[Active Bugs]].
 	- Drafted, not deployed: `firestore.rules`/`storage.rules` changes locking the `assetChangeLogs` collection to Cloud-Function-only access and adding a size/type allowlist to the `asset-uploads` Storage path. Needs review before deploy.
-

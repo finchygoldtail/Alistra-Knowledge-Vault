@@ -4,7 +4,7 @@ type: architecture
 status: live
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-08
+updated: 2026-08-11
 tags: [auth, firebase]
 ---
 
@@ -33,7 +33,16 @@ This section replaces the requirements-only framing above with what `fibre-gis`'
 - **Privileged-account note (relevant to this stage's "implement stronger protection for Super Admin/Admin" instruction):** `useSessionEnforcement` explicitly **exempts** `admin` and `super_admin` roles from the single-session kick-out — i.e. the highest-privilege accounts currently get *weaker* session-concurrency enforcement than everyone else, not stronger. This may be a deliberate, reasonable tradeoff (support/ops staff plausibly need legitimate multi-device access), but it's the opposite of what this stage asked to check for, so flagging it explicitly rather than silently accepting it: **worth an explicit product decision** on whether privileged accounts should get the same or *stricter* concurrent-session enforcement, not an exemption from it. No code change made — this is a policy call, not a bug.
 - **Platform-owner bootstrap**: a hardcoded owner-email allow-list (`OWNER_EMAILS`) grants implicit `super_admin` regardless of any Firestore document, independently evaluated in five separate places across the codebase (Firestore rules, Storage rules, and three places in `functions/src`). Already flagged in [[Secrets Audit 2026-08-08]] and the original current-state validation as undocumented/duplicated; no single source of truth. Not fixed this session (out of scope for an authentication *review* — this is a consolidation refactor, not a vulnerability, since all five copies currently agree).
 
+## Security hardening deployed 2026-08-11
+
+- Forced and administrator-created passwords now require at least 12 characters.
+- `changeOwnPassword` requires a recent sign-in and an existing explicitly-active membership, updates existing profiles only, revokes refresh tokens, and signs the user out for a clean login.
+- Missing or false membership `active` values fail closed in the client, Cloud Functions, Firestore rules and Storage rules. Disabled Firebase Auth records are also rejected by privileged and Storage entry points.
+- `createLoginUser` creates only a genuinely new Firebase Auth identity. If the email already exists it returns `already-exists`; it never resets the password, changes the display name, or re-enables that account.
+- Tenant-admin authority comes only from an explicitly active membership in the requested business. Cross-tenant authority is limited to the platform owner or an explicitly active root `super_admin`.
+
+This section supersedes the older 8-character and default-active descriptions above. See [[Security Remediation 2026-08-11]].
+
 ## Not reviewed in this pass
 
 Firebase Auth's own built-in abuse protections (rate-limiting repeated failed sign-in attempts, temporary account lockouts) are platform-level and were not independently verified — they're Google's responsibility, not app code, so there's nothing in this repo to audit for them.
-
