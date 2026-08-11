@@ -43,6 +43,12 @@ An adversarial review of the production website and `fibre-gis` repository ident
 - Existing-email onboarding must use an explicit invitation/membership workflow; the create-login route will not take ownership of an existing Auth identity.
 - The known broader product decisions in [[Active Bugs]] remain separate: serverless rate limiting and per-record ownership/read isolation were not silently redesigned in this remediation.
 
+## Post-release authentication compatibility hotfix
+
+The initial CSP release blocked Firebase Google popup authentication because Firebase Auth dynamically loads `https://apis.google.com/js/api.js`, which was not present in `script-src`. Email/password authentication still reached Firebase, but Google sign-in returned `auth/internal-error`. Direct navigation to `/login` also exposed a pre-existing Vercel SPA-routing 404.
+
+Commit `dba2140` (`Restore Google sign-in under CSP`) added only the Firebase-required `https://apis.google.com` and `https://www.gstatic.com` script origins, retained the remaining restrictive CSP directives, and added Vercel's `/index.html` SPA fallback. Two regression tests cover the required auth origins and direct application routing. The full application/security suite passed **279/279**, the production build passed, Vercel reported success, `/login` rendered directly in production, and the Google button entered the popup flow without `auth/internal-error` or browser console errors.
+
 ## Related notes
 
 - [[Authentication]]

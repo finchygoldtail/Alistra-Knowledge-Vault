@@ -36,6 +36,8 @@ Commit `eeeab79` (`Harden tenant authentication and storage security`) was pushe
 
 Firebase production project `fibre-gis-v2` was updated separately. Firestore and Storage rules compiled and released successfully, then all 128 application Functions were explicitly updated. The explicit function list preserved the already-deployed `fridayAiHealth` and `fridayChat` endpoints instead of accepting Firebase CLI's proposed deletion. Firebase reported `Deploy complete` after automatically retrying transient per-project mutation-quota responses. See [[Security Remediation 2026-08-11]].
 
+Post-release commit `dba2140` corrected Firebase Google popup compatibility under the CSP and added a Vercel SPA rewrite so direct `/login` navigation resolves to the application instead of a platform 404. Vercel reported the hotfix deployment successful; production smoke testing confirmed the direct login route and Google popup start without `auth/internal-error`.
+
 ## Checks
 
 - Environment variables align with [[Firebase Infrastructure]].
