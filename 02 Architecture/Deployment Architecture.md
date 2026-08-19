@@ -4,7 +4,7 @@ type: architecture
 status: draft
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-02
+updated: 2026-08-11
 tags: [deployment, vercel, firebase]
 ---
 
@@ -18,5 +18,5 @@ The frontend deploys through Vercel. Firebase provides Authentication, Firestore
 - [[Vercel Deployment]]
 - [[Firebase Infrastructure]]
 - [[Backup and Recovery]]
+- [[09 Disaster Recovery Plan]]
 - [[Client Hosted Deployment]]
-
