@@ -4,7 +4,7 @@ type: bug-index
 status: active
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-07
+updated: 2026-08-19
 tags: [bugs, testing]
 ---
 
@@ -43,4 +43,26 @@ Items below came out of the 2026-08-07 `fibre-gis` re-audit, "Round 4" ([full re
 - [ ] `react-hooks/exhaustive-deps`/`set-state-in-effect` warnings: 55, map subsystem flat at 26 — scattered across many unrelated files, not a targeted fix; left for a dedicated lint-cleanup pass if wanted. Stale leftover git worktree at `.claude/worktrees/kind-goldstine-dbc83a/` still needs deleting (repo hygiene, unrelated to code).
 - [ ] Oversized files: `JointMapManager.tsx` now 3,431 lines — a decomposition project, not something to attempt inside a bug-fix pass.
 - [ ] Thin CRUD wrapper duplication across `src/modules/*` — confirmed a stable, accepted convention, not actually a problem.
+
+## 2026-08-19 session
+
+Full context in [[Map Asset Storage Audit 2026-08-19]] and [[Concurrent Login Control]].
+
+### Fixed and deployed
+
+- [x] ~~Every user, on every role, is signed out on their first page refresh.~~ Fixed: removed the per-uid `revokeRefreshTokens` call from `stampUserSession`, which was invalidating the token the same sign-in had just been issued. Deployed to `fibre-gis-v2` and confirmed by the user. See [[Concurrent Login Control]].
+
+### Fixed, not yet deployed (committed on `wip/2026-08-19-checkpoint`)
+
+- [x] ~~`getCompanyManagementAnalytics` throws `Cannot read properties of undefined (reading 'documentId')` under the Functions emulator, shown in the UI as a bare `INTERNAL Retry` on Management → Areas.~~ Fixed: 47 `admin.firestore.<Static>` call sites across 11 files converted to deep imports from `firebase-admin/firestore`. Emulator-only (firebase-tools' admin stub `bind`s the namespace function and loses its statics); production was never affected, but it would have broken every vehicle, equipment, employee and work-pack write path in local QA, not just the one call.
+- [x] ~~Map assets duplicate on every save cycle when two chunk documents resolve to the same index (`chunk_0` alongside `chunk_00000`).~~ Fixed: reader collapses duplicate indices to the zero-padded document, and the emulator seed script no longer writes the unpadded form.
+- [x] ~~The main chunk path never de-duplicated by asset id, so duplicates compounded rather than staying flat.~~ Fixed: repeated ids dropped on load with a warning; the repair persists on the next save. Production data audited afterwards and clean.
+
+### Open
+
+- [ ] **Single-session enforcement exempts exactly the wrong roles.** `isExempt = role === "admin" || role === "super_admin"` — the two highest-privilege roles skip enforcement entirely, while a manager is signed out when their credentials are used elsewhere. First flagged in the 2026-08-08 Stage 8 review; still a product decision rather than a defect. Exempting by registered device rather than privilege level would invert it correctly.
+- [ ] **COOP blocks `signInWithPopup`.** `Cross-Origin-Opener-Policy policy would block the window.closed call`, fired repeatedly on the live site. Warning-only in Chrome today but breaks the popup flow under stricter settings. Either loosen COOP on the auth route or move Google sign-in to `signInWithRedirect`.
+- [ ] **`tests/role-model.test.ts:30` fails eslint** with `no-regex-spaces`, and eslint runs in CI as of `878b575`. Auto-fixable; a literal multi-space in a regex.
+- [ ] **Server-side asset repository lacks the de-duplication and single-read fixes.** Production saves route through `functions/src/storage/firestoreAssetRepository.ts`, not the client path improved this session. It still double-reads `mapAssets/main` per save and has no de-duplication of either kind. Not urgent while the data is clean; port it when that file is next touched.
+- [ ] **Company ids are taken from display names, not slugified.** One tenant id is `harrelli comms`, with a space. Legal in Firestore but inconsistent, and awkward in paths and URLs. Fix in `createCompany`.
 
