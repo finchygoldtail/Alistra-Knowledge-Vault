@@ -1,7 +1,7 @@
 ---
 status: draft
-updated: 2026-08-11
-related: ["[[CURRENT_STATE_VALIDATION]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]"]
+updated: 2026-08-21
+related: ["[[CURRENT_STATE_VALIDATION]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]"]
 ---
 
 # Commercial Readiness Dashboard
@@ -14,6 +14,7 @@ This folder does not replace the existing legal, security, infrastructure or arc
 
 | Stage | File | Status | Result |
 |---|---|---|---|
+| 11 | [[Cost and Abuse Protection]] | Complete | App Check live but not enforced (staged: watch metrics, then enable per service); per-user rate limiting live on twelve callables; Firestore TTL on the counters active. |
 | 14 | [[04 Data Retention Schedule]] | Drafted | Policy drafted; enforcement not implemented. |
 | 15 | [[05 Subprocessor Register]] | Drafted | Providers identified; DPA/region checks remain. |
 | 16 | [[06 DPIA]] | Drafted | Privacy risks assessed; legal/privacy review required. |
@@ -28,3 +29,7 @@ This folder does not replace the existing legal, security, infrastructure or arc
 ## Current Go-Live Position
 
 Stages 20 and 21 are passed and the Stage 22 disaster-recovery plan is implemented. Before pilot, the DR exercises must still prove frontend rollback, selective Storage restoration and application cutover to a restored database, and a deputy recovery owner must be assigned. Stage 23 incident response is next. Other recorded commercial-readiness dependencies remain in their stage files.
+
+Stage 11 closed on 2026-08-21: App Check and per-user rate limiting are both deployed. One step remains and it is not code -- App Check enforcement is a Firebase console setting, held back until verified requests hold near 100% for several days, because switching it on early locks out every real user.
+
+The two gaps that stand out against the stages above are both about **enforcement rather than policy**: the Data Retention Schedule (stage 14) still enforces nothing, since the only automated deletion anywhere in the project is the TTL on rate limit counters, and the billing architecture remains open. Billing is the next substantive piece of work.

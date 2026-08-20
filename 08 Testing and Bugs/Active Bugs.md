@@ -4,7 +4,7 @@ type: bug-index
 status: active
 owner: Alistair
 created: 2026-08-02
-updated: 2026-08-19
+updated: 2026-08-21
 tags: [bugs, testing]
 ---
 
@@ -43,6 +43,21 @@ Items below came out of the 2026-08-07 `fibre-gis` re-audit, "Round 4" ([full re
 - [ ] `react-hooks/exhaustive-deps`/`set-state-in-effect` warnings: 55, map subsystem flat at 26 — scattered across many unrelated files, not a targeted fix; left for a dedicated lint-cleanup pass if wanted. Stale leftover git worktree at `.claude/worktrees/kind-goldstine-dbc83a/` still needs deleting (repo hygiene, unrelated to code).
 - [ ] Oversized files: `JointMapManager.tsx` now 3,431 lines — a decomposition project, not something to attempt inside a bug-fix pass.
 - [ ] Thin CRUD wrapper duplication across `src/modules/*` — confirmed a stable, accepted convention, not actually a problem.
+
+## 2026-08-20/21 session
+
+Full context in [[Cost and Abuse Protection]].
+
+### Fixed and deployed
+
+- [x] ~~The login page took for ever and the Google sign-in popup would not open at all.~~ Caused by the App Check change shipped hours earlier. App Check loads reCAPTCHA Enterprise from `https://www.google.com/recaptcha/enterprise.js`, and the CSP allowed `apis.google.com` and `www.gstatic.com` but not `www.google.com`, so the script was blocked outright and token refresh retried in the background. Fixed by adding `www.google.com` to `script-src` and `frame-src` in both `vercel.json` and `firebase.json`; verified against the live response headers. **Worth remembering why it was not caught**: `startAppCheck` only wraps `initializeAppCheck` in try/catch, and the script load happens asynchronously inside the provider afterwards, so nothing throws anywhere anything is watching — the only symptom is slowness. The existing CSP test passed throughout, because its assertions are prefix matches that a longer allowlist still satisfies; it now asserts the reCAPTCHA host explicitly.
+- [x] ~~Root-privileged users could clear their own rate limit counters.~~ `backendRateLimits` is a root-level collection and the root catch-all in `firestore.rules` granted read and write to any root-privileged user. Fixed by excluding it in the catch-all itself — a narrower `allow ...: if false` would not have worked, since Firestore rules are OR-ed across matching paths. Two regression tests added.
+
+### Open, carried forward
+
+- [ ] **App Check enforcement is not on**, by design. Verified requests must hold near 100% for several days first. Before switching it on, register `fibre-gis-v2.vercel.app` and the long `alistragis-…vercel.app` alias with the reCAPTCHA key, or confirm nobody uses them — both currently resolve and neither is covered.
+- [ ] **No per-company or per-IP rate limit.** Everything is per user, so ten users in one company can generate ten times the traffic.
+- [ ] **`getDailyProgressTotals` is still today-only for point markers** in `WorkspaceMap.tsx`, used for joint and DP markers. Same shape as the completed-sections bug fixed on 2026-08-20, never investigated.
 
 ## 2026-08-19 session
 
