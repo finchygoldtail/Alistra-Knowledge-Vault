@@ -24,7 +24,7 @@ This folder does not replace the existing legal, security, infrastructure or arc
 | 20 | [[Stage 20 Backup Implementation]] | Complete | Firestore PITR/daily backups and a verified daily append-only Storage mirror are live. |
 | 21 | [[Stage 21 Restore Test]] | Passed | Isolated restore completed in 10m 27.893s; data/index/security checks passed and the temporary target was removed. |
 | 22 | [[09 Disaster Recovery Plan]] | Implemented | Recovery priorities and all required failure scenarios are documented; three failover/restore drills and deputy assignment remain before pilot. |
-| Commercial billing architecture | [[Commercial Allocation Billing Architecture]] | In progress | Parent boundary is separated from allocations; lifecycle and final billing controls remain open. |
+| Commercial billing architecture | [[Commercial Allocation Billing Architecture]] | Awaiting live test | Money-out chain complete and deployed: the export now states the certified value, and subcontractor invoices are recorded and matched with a one-invoice-per-valuation guard. One real allocation taken through to a paid invoice on live Firebase is all that remains. Money in is not started. |
 
 ## Current Go-Live Position
 
@@ -32,4 +32,6 @@ Stages 20 and 21 are passed and the Stage 22 disaster-recovery plan is implement
 
 Stage 11 closed on 2026-08-21: App Check and per-user rate limiting are both deployed. One step remains and it is not code -- App Check enforcement is a Firebase console setting, held back until verified requests hold near 100% for several days, because switching it on early locks out every real user.
 
-The two gaps that stand out against the stages above are both about **enforcement rather than policy**: the Data Retention Schedule (stage 14) still enforces nothing, since the only automated deletion anywhere in the project is the TTL on rate limit counters, and the billing architecture remains open. Billing is the next substantive piece of work.
+Billing moved a long way on 2026-08-21 and is closer to done than it looked, because most of it already existed under another name: an allocation is an area, and the chain through to a certified value signed off by a second person was already running. What is left of the money-out side is not code -- it is one real allocation taken through to a paid invoice on live Firebase.
+
+The gap that now stands out most is **enforcement rather than policy**: the Data Retention Schedule (stage 14) still enforces nothing, since the only automated deletion anywhere in the project is the TTL on rate limit counters.
