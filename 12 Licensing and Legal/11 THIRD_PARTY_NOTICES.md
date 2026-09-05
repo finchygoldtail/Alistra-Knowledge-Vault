@@ -1,12 +1,12 @@
 ---
 status: live
-updated: 2026-08-08
+updated: 2026-09-05
 related: ["[[10 Third Party Licence Register]]", "[[Intellectual Property]]"]
 ---
 
 # Third Party Notices
 
-This product includes third-party open-source software. This file lists every production (runtime-shipped) dependency of fibre-gis's frontend, its licence, and a link to its source repository, generated automatically from `package-lock.json` on 2026-08-08 (`license-checker-rseidelsohn`, production dependencies only — build/test-only tooling like TypeScript, ESLint and Vite's dev toolchain is excluded since it never ships to end users). AlistraGIS's `map-frontend` has the same runtime dependency set.
+This product includes third-party open-source software. This file lists every production (runtime-shipped) dependency of fibre-gis's frontend, its licence, and a link to its source repository, generated automatically from `package-lock.json`, most recently re-run 2026-09-05 (originally 2026-08-08; `license-checker-rseidelsohn`, production dependencies only — build/test-only tooling like TypeScript, ESLint and Vite's dev toolchain is excluded since it never ships to end users). AlistraGIS's `map-frontend` has the same runtime dependency set.
 
 See [[10 Third Party Licence Register]] for the three entries here that need a closer look before commercial go-live (`leaflet-rotate` — GPL-3.0, `react-leaflet`/`@react-leaflet/core` — Hippocratic-2.1, `@mapbox/jsonlint-lines-primitives` — undeclared licence) and for a note on the security-vulnerability status of these same packages, which is a separate concern from licensing and not repeated here.
 
@@ -149,7 +149,7 @@ Full licence text for every package below is available on request from its linke
 - [is-number@7.0.0](https://github.com/jonschlinkert/is-number) - MIT
 - [js-tokens@4.0.0](https://github.com/lydell/js-tokens) - MIT
 - [json-stringify-pretty-compact@4.0.0](https://github.com/lydell/json-stringify-pretty-compact) - MIT
-- [jspdf@3.0.4](https://github.com/parallax/jsPDF) - MIT (see [[10 Third Party Licence Register]] for its open security CVEs — a licensing/security distinction)
+- [jspdf@4.2.1](https://github.com/parallax/jsPDF) - MIT (upgraded from 3.0.4 since the previous CVEs noted in [[10 Third Party Licence Register]] — no longer flagged by `npm audit` as of 2026-09-05)
 - [jsts@2.7.1](https://github.com/bjornharrtell/jsts) - (EDL-1.0 OR EPL-1.0)
 - [kdbush@4.0.2](https://github.com/mourner/kdbush) - ISC
 - [leaflet-rotate@0.2.8](https://github.com/Raruto/leaflet-rotate) - **GPL-3.0 — see [[10 Third Party Licence Register]], needs legal review**
@@ -224,7 +224,7 @@ Full licence text for every package below is available on request from its linke
 - [tslib@2.8.1](https://github.com/Microsoft/tslib) - 0BSD
 - [undici-types@7.16.0](https://github.com/nodejs/undici) - MIT
 - [utrie@1.0.2](https://github.com/niklasvh/utrie) - MIT
-- [uuid@8.3.2](https://github.com/uuidjs/uuid) - MIT
+- [uuid@8.3.2 / 11.1.1](https://github.com/uuidjs/uuid) - MIT (11.1.1 pinned via `overrides` in both `package.json` and `functions/package.json`, closing the transitive vulnerability noted in [[10 Third Party Licence Register]])
 - [vite-plugin-static-copy@3.1.4](https://github.com/sapphi-red/vite-plugin-static-copy) - MIT
 - [vite@7.3.6](https://github.com/vitejs/vite) - MIT
 - [warning@3.0.0](https://github.com/BerkeleyTrue/warning) - BSD-3-Clause
@@ -234,7 +234,7 @@ Full licence text for every package below is available on request from its linke
 - [wmf@1.0.2 / word@0.3.0](https://github.com/SheetJS) - Apache-2.0
 - [wrap-ansi@6.2.0 / 7.0.0](https://github.com/chalk/wrap-ansi) - MIT
 - [xlsx-js-style@1.2.0](https://github.com/gitbrent/xlsx-js-style) - Apache-2.0
-- [xlsx@0.18.5](https://github.com/SheetJS/sheetjs) - Apache-2.0 (see [[10 Third Party Licence Register]] for its open security CVEs)
+- [xlsx@0.20.3](https://github.com/SheetJS/sheetjs) - Apache-2.0 (pulled directly from SheetJS's own CDN rather than npm, per the fix noted in [[10 Third Party Licence Register]] — no longer flagged by `npm audit` as of 2026-09-05)
 - [y18n@4.0.3 / 5.0.8](https://github.com/yargs/y18n) - ISC
 - [yargs-parser@18.1.3 / 21.1.1](https://github.com/yargs/yargs-parser) - ISC
 - [yargs@15.4.1 / 17.7.3](https://github.com/yargs/yargs) - MIT

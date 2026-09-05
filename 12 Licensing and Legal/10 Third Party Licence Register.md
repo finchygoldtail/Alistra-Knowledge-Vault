@@ -1,12 +1,12 @@
 ---
 status: live
-updated: 2026-08-08
+updated: 2026-09-05
 related: ["[[Decision Log]]", "[[Intellectual Property]]", "[[11 THIRD_PARTY_NOTICES]]"]
 ---
 
 # Third Party Licence Register
 
-Stage 7 of the commercial go-live programme. Full automated dependency inventory generated with [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn) against fibre-gis's frontend (579 packages) and Cloud Functions dependency trees, 2026-08-08. AlistraGIS's `map-frontend` has a near-identical dependency set (diffed directly — same runtime dependencies, only test tooling differs), so it is not separately re-audited; treat findings here as applying to both.
+Stage 7 of the commercial go-live programme. Full automated dependency inventory generated with [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn) against fibre-gis's frontend (644 packages including dev/test tooling, 382 production/runtime-shipped) and Cloud Functions dependency trees, re-run 2026-09-05 (originally 2026-08-08, 579 packages — the growth is mainly Turf's per-function submodules and the Vitest/testing-library toolchain, both already covered under existing group entries, not new individually-reviewed risk). AlistraGIS's `map-frontend` has a near-identical dependency set (diffed directly — same runtime dependencies, only test tooling differs), so it is not separately re-audited; treat findings here as applying to both.
 
 **License breakdown (frontend, 579 packages):** 447 MIT, 83 Apache-2.0, 56 ISC, 26 BSD-3-Clause, 11 BSD-2-Clause, plus small counts of MIT-0, Unlicense, 0BSD, BlueOak-1.0.0, CC0-1.0 (all standard permissive) — and 13 packages needing individual review, listed below. No automated removal was done based on licence name alone, per programme rule; each item below was read directly (LICENSE file and/or package.json) rather than trusted to the automated classifier label.
 
@@ -33,16 +33,8 @@ Stage 7 of the commercial go-live programme. Full automated dependency inventory
 
 ## Security status (separate from licensing, checked as part of the same pass)
 
-`npm audit` found 16 vulnerabilities in the frontend (1 low, 4 moderate, 10 high, 1 critical) and 15 in Cloud Functions (1 low, 11 moderate, 3 high) before this audit. Ran `npm audit fix` (non-breaking only, no `--force`) in both and re-verified with a full typecheck + build + the 267-test suite — all passing, no regressions.
+**2026-09-05 re-check:** all three items flagged as deliberately unresolved on 2026-08-08 are now resolved. `jspdf` is on 4.2.1 (was 3.0.4), `xlsx` is on 0.20.3 pulled directly from SheetJS's own CDN (`https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz` in `package.json`, was 0.18.5 via npm) — the exact "pull a patched build from SheetJS's own distribution channel" option this register previously flagged as a decision to make — and `uuid` is pinned to 11.1.1 via an explicit `overrides` entry in both `package.json` (root, and nested under `react-d3-tree`) and `functions/package.json`, closing the transitive gap. `npm audit` no longer lists any of the three.
 
-**Resolved:** 12 of 16 frontend vulnerabilities (ajv, brace-expansion, flatted, js-yaml, minimatch, nanoid, picomatch, postcss, rollup, vite, dompurify), and 4 of 15 in Cloud Functions.
+Current `npm audit` state: **2 moderate** in the frontend (`@humanfs/node`, `fflate`, both with a non-breaking fix available) and **1 moderate** in Cloud Functions (`qs`, non-breaking fix available). None force-applied yet — same "not forced through blind" policy as before; these are auto-fixable with `npm audit fix` (no `--force` needed) whenever someone runs it, just not yet actioned as of this note. Down from 16 (frontend) and 15 (functions) on 2026-08-08.
 
-**Deliberately left unresolved — flagged for dedicated review, not force-upgraded blind:**
-
-| Package | Severity | Why not auto-fixed |
-|---|---|---|
-| `jspdf` (client PDF export) | Critical (10 CVEs, including arbitrary JS execution via PDF injection) | Fix requires `npm audit fix --force` and installs a version npm itself labels a breaking change. Needs to be upgraded with actual testing of every PDF export flow before shipping, not forced through in an audit pass. |
-| `xlsx` (SheetJS spreadsheet export) | High (prototype pollution, ReDoS) | No fix available via npm at all — this is a known, longstanding SheetJS/npm situation; the maintainers publish patched releases outside the npm registry. Needs a deliberate decision: pull a patched build from SheetJS's own distribution channel, or accept the risk for now. |
-| `uuid` (transitive, via `react-d3-tree` and separately via `firebase-admin`'s Google Cloud SDK chain) | Moderate (missing buffer bounds check) | Frontend: no compatible fix in `react-d3-tree`'s current range. Backend: the only fix path npm offers is downgrading `firebase-admin` to v10, a major breaking downgrade of the entire Admin SDK — rejected. Deep transitive issue inside Google's own SDKs; expect it to resolve itself in a future `firebase-admin` release rather than something to patch locally. |
-
-None of these three are being ignored — they're being tracked here explicitly rather than silently left in the automated "clean" state a plain `npm audit fix` run would otherwise imply.
+**Historical, for reference — original 2026-08-08 finding:** `npm audit` found 16 vulnerabilities in the frontend (1 low, 4 moderate, 10 high, 1 critical) and 15 in Cloud Functions (1 low, 11 moderate, 3 high). `npm audit fix` (non-breaking only, no `--force`) resolved 12 of 16 frontend vulnerabilities (ajv, brace-expansion, flatted, js-yaml, minimatch, nanoid, picomatch, postcss, rollup, vite, dompurify) and 4 of 15 in Cloud Functions, leaving jspdf/xlsx/uuid tracked above as open until today's re-check.
