@@ -33,7 +33,7 @@ AlistraGIS is intended to provide a single operational platform for telecom netw
 Duct/sub-duct modelling, cable containment, field/mobile delivery, data integrity, performance, security, refactoring, operational management and commercial-GIS foundations.
 
 **Evidence basis**  
-GitHub source-control history in `finchygoldtail/AlistraGIS`. Commit timestamps prove development activity at specific points but do not, by themselves, prove continuous working hours between commits. The detailed day-by-day evidence record is maintained in `R&D/GitHub Development Evidence Timeline.md`.
+GitHub source-control history in `finchygoldtail/AlistraGIS`. Commit timestamps prove development activity at specific points but do not, by themselves, prove continuous working hours between commits. The detailed day-by-day evidence record is maintained in `19 Research and Development/GitHub Development Evidence Timeline.md`.
 
 **Duct/sub-duct origin — 22 July 2026**  
 Commit `73fd9b47` — **Add duct and sub-duct route workflow** — introduced duct as a mapped line asset, duct count/diameter/use, cable-to-duct linking and generation of child sub-duct records along duct geometry. Commit `7527ff13` followed by separating duct storage and layers.
@@ -69,8 +69,8 @@ The source-control trail shows that the duct/sub-duct model became a foundation 
 Not all commits or hours automatically qualify as R&D. Routine UI changes, normal feature development and ordinary bug fixing should be separated from work directly resolving technological uncertainty. GitHub evidence is used to corroborate activity and workstream, not to manufacture unsupported hours.
 
 **Evidence links**  
-- `R&D/GitHub Development Evidence Timeline.md`
-- `R&D/AI and Development Cost Register.md`
+- `19 Research and Development/GitHub Development Evidence Timeline.md`
+- `19 Research and Development/AI and Development Cost Register.md`
 - Repository commits including `73fd9b47`, `9739be4d`, `cd8ca13f`, `4626201e`, `905c8e96`, `39f91285`, `125262ad`
 - AI coding sessions and dated ChatGPT/Claude records where available
 

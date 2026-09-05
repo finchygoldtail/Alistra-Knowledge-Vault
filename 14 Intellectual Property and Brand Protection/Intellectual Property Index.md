@@ -17,11 +17,12 @@
 
 1. [[01 Brand and Domain Register]]
 2. [[02 Trade Mark Registration Plan]]
-3. [[03 Source Code Ownership Record]]
-4. [[04 Developer Access Control Register]]
-5. [[05 Copyright Notice Standard]]
-6. [[06 Version Control and Repository Policy]]
-7. [[07 Professional Contacts]]
+3. [[Trade Mark Clearance Search Record]]
+4. [[03 Source Code Ownership Record]]
+5. [[04 Developer Access Control Register]]
+6. [[05 Copyright Notice Standard]]
+7. [[06 Version Control and Repository Policy]]
+8. [[07 Professional Contacts]]
 
 ## Immediate actions
 

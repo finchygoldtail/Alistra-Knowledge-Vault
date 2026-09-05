@@ -30,11 +30,14 @@ Created the requested AlistraGIS Obsidian vault structure, dashboard notes, prod
 - 11 Business and Pricing
 - 12 Licensing and Legal
 - 13 Clients
-- 14 Fibre Standards
-- 15 FRIDAY AI
-- 16 Screenshots and Renders
+- 14 Intellectual Property and Brand Protection
+- 15 Fibre Standards
+- 16 FRIDAY AI
+- 17 Screenshots and Renders
+- 18 Commercial Readiness
+- 19 Research and Development
+- 90 Templates
 - 99 Archive
-- Templates
 
 ## Assumptions
 
@@ -60,4 +63,3 @@ Created the requested AlistraGIS Obsidian vault structure, dashboard notes, prod
 - Add real bugs to [[Active Bugs]] as they are confirmed.
 - Capture deployment variables and release checks in [[Vercel Deployment]] and [[Firebase Infrastructure]].
 - Build the first FRIDAY knowledge flows in [[FRIDAY AI Roadmap]].
-

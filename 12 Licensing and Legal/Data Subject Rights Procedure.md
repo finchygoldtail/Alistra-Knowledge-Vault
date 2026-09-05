@@ -2,7 +2,7 @@
 status: draft
 updated: 2026-08-08
 stage: 17
-related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[DPIA]]", "[[Subprocessor Register]]", "[[Privacy Notice and Website Legal Notices]]"]
+related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[DPIA]]", "[[Subprocessor Register]]", "[[08 Privacy Notice and Website Legal Notices]]"]
 ---
 
 # Data Subject Rights Procedure

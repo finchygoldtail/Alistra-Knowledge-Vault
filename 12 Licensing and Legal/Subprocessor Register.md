@@ -2,7 +2,7 @@
 status: draft
 updated: 2026-08-08
 stage: 15
-related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Firebase Infrastructure]]", "[[Vercel Deployment]]", "[[FRIDAY Security Model]]", "[[Privacy Notice and Website Legal Notices]]"]
+related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Firebase Infrastructure]]", "[[Vercel Deployment]]", "[[FRIDAY Security Model]]", "[[08 Privacy Notice and Website Legal Notices]]"]
 ---
 
 # Subprocessor Register
@@ -59,7 +59,7 @@ Stage 15 of the commercial go-live programme. This register lists actual and con
 | SUB-03 | Decide whether FRIDAY/NVIDIA is enabled for any pilot customer; if yes, confirm NVIDIA data processing terms before use | P1 | Required |
 | SUB-04 | Review CARTO and Nominatim/OpenStreetMap terms for production/commercial tile and geocoding usage | P1 | Required |
 | SUB-05 | Confirm the actual Street Manager API provider and contractual/data-processing basis before enabling permit-extension calls | P1 | Required |
-| SUB-06 | Update [[Privacy Notice and Website Legal Notices]] from this register before publication | P1 | Required |
+| SUB-06 | Update [[08 Privacy Notice and Website Legal Notices]] from this register before publication | P1 | Required |
 
 ## Review Cycle
 

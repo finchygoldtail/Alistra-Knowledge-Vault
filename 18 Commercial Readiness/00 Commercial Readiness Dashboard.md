@@ -1,7 +1,7 @@
 ---
 status: draft
 updated: 2026-08-21
-related: ["[[CURRENT_STATE_VALIDATION]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]"]
+related: ["[[Current State Validation 2026-08-08]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]"]
 ---
 
 # Commercial Readiness Dashboard

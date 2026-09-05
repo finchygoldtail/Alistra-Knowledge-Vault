@@ -2,7 +2,7 @@
 status: draft
 updated: 2026-08-08
 stage: 14
-related: ["[[03 GDPR Data Register]]", "[[GDPR Responsibilities]]", "[[Backup and Recovery]]", "[[Audit Logging]]", "[[Privacy Notice and Website Legal Notices]]"]
+related: ["[[03 GDPR Data Register]]", "[[GDPR Responsibilities]]", "[[Backup and Recovery]]", "[[Audit Logging]]", "[[08 Privacy Notice and Website Legal Notices]]"]
 ---
 
 # Data Retention Schedule

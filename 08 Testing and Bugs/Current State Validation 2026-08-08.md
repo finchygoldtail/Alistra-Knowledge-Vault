@@ -58,7 +58,7 @@ Priority tags follow the programme's P0–P3 scale (P0 = commercial blocker).
 
 ## 2. Audit log (`assetChangeLogs`) integrity — **P0, new finding not in vault**
 
-**Documented state:** Not separately called out anywhere in the vault as its own risk; only referenced in passing as the CF-gateway precedent (see §1). `R&D/R&D Risk Register.md` (RND-R15, "Audit logs can be forged, altered, deleted or duplicated") flags this as a *risk register* entry in the R&D/tax-claim tracker, not in the product security docs, and without the specific mechanism.
+**Documented state:** Not separately called out anywhere in the vault as its own risk; only referenced in passing as the CF-gateway precedent (see §1). `19 Research and Development/R&D Risk Register.md` (RND-R15, "Audit logs can be forged, altered, deleted or duplicated") flags this as a *risk register* entry in the R&D/tax-claim tracker, not in the product security docs, and without the specific mechanism.
 
 **Actual code state:** Two problems compound: (a) `assetChangeLogs/*` has no Firestore-rules-level protection beyond business membership — any active member, any role, can write/delete audit-log documents directly via the client SDK; (b) the CF callable path (`createAssetChangeLog`) checks membership only, not role, so even the "safe" path doesn't restrict who can create entries. The repo's own scanner previously flagged an even earlier version of this code doing raw `addDoc` writes with no callable at all (`friday-health.md`, finding FRI-048, severity "high").
 
@@ -118,7 +118,7 @@ Priority tags follow the programme's P0–P3 scale (P0 = commercial blocker).
 
 ## 7. Deployment configuration — **P2, confusing but functional dual Firebase config**
 
-**Documented state:** `[[Vercel Deployment]]` (the vault's most detailed and accurate deployment doc) correctly states Vercel is the only thing serving `alistragis.com`/`www.alistragis.uk`, deploys automatically on push to `main`, and that `firebase deploy` is "only ever needed for `--only functions` or `--only firestore:rules`." This matches [[fibre-gis-deployment-model]] guidance already held elsewhere: frontend ships via `git push origin main` → Vercel, not `firebase deploy --only hosting`.
+**Documented state:** `[[Vercel Deployment]]` (the vault's most detailed and accurate deployment doc) correctly states Vercel is the only thing serving `alistragis.com`/`www.alistragis.uk`, deploys automatically on push to `main`, and that `firebase deploy` is "only ever needed for `--only functions` or `--only firestore:rules`." This matches the `fibre-gis-deployment-model` guidance held elsewhere: frontend ships via `git push origin main` → Vercel, not `firebase deploy --only hosting`.
 
 **Actual code state:** There are **two separate `firebase.json` files** with different, overlapping scopes:
 - Repo-root `firebase.json`: hosting site `"alistragis"` (serves only a static stub/health page, not the real app), functions source `backend/` — **no `firestore` or `storage` key at all**.
