@@ -1,79 +1,90 @@
 ---
-status: draft
-updated: 2026-08-08
+status: draft-for-professional-review
+updated: 2026-09-07
 stage: 16
-related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Subprocessor Register]]", "[[FRIDAY Security Model]]", "[[API Security Assessment 2026-08-08]]", "[[Security Overview]]"]
+related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Subprocessor Register]]", "[[FRIDAY Security Model]]", "[[API Security Assessment 2026-08-08]]", "[[Security Overview]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[Data Breach and Incident Response]]"]
 ---
 
 # Data Protection Impact Assessment
 
-Stage 16 of the commercial go-live programme. This is an engineering-led DPIA draft for AlistraGIS / `fibre-gis`, based on the current source code and vault evidence. It is not legal advice and does not decide, by itself, whether a DPIA is legally mandatory. It records the facts and risks that a solicitor, DPO or customer privacy lead should review.
+Stage 16 of the commercial go-live programme. This is an engineering-led DPIA draft for AlistraGIS / `fibre-gis`, based on source-code and vault evidence. It is not legal advice and does not decide, by itself, whether a DPIA is legally mandatory. It records the facts and risks for review by a solicitor, DPO or customer privacy lead.
 
 ## Scope
 
-AlistraGIS is a B2B telecommunications GIS and operations platform. It stores customer-controlled operational records for fibre projects, map assets, work packs, employee/vehicle/plant records, files/photos, support tickets, audit events and limited licence metadata. FRIDAY AI is a read-only assistant that can summarise production data within the caller's existing permissions.
+AlistraGIS is a B2B infrastructure GIS and operations platform, currently focused on fibre/telecommunications with planned expansion into water, gas, electricity/power, renewables and wireless point-to-point/line-of-sight infrastructure. It stores customer-controlled operational records including map assets, projects, work packs, employee/vehicle/plant records, files/photos, support tickets, audit events and limited licence metadata. FRIDAY AI is currently designed as a read-only assistant operating within the caller's permissions.
 
-The live product is `C:\Projects\fibre-gis`, deployed with Firebase/GCP backend services and Vercel frontend hosting.
-
-## Files reviewed for this stage
-
-| File | Why it was reviewed | Result |
-|---|---|---|
-| `Alistra Knowledge Vault/12 Licensing and Legal/03 GDPR Data Register.md` | Data categories and previous Stage 13 findings | Used as the primary input. |
-| `fibre-gis/functions/src/index.ts` | Tickets, user deletion, company backup/delete, Street Manager and asset logs | Confirms support/free-text, permit API, manual deletion and backup-before-delete flows. |
-| `fibre-gis/functions/src/friday/fridayCallables.ts` | AI processing and logging | Confirms FRIDAY is read-only, rate-limited, does not persist prompts/replies in app logs, and sends data to NVIDIA if enabled. |
-| `fibre-gis/src/components/map/permits/permitLocationLookup.ts` | Geolocation/geocoding | Confirms coordinate-based Nominatim lookup. |
-| `fibre-gis/src/config/mapTiles.ts` and `FreeLeafletBaseLayer.tsx` | Map tile exposure | Confirms map tile providers see tile/coordinate requests from browser clients. |
-| `Alistra Knowledge Vault/09 Security and Permissions/API Security Assessment 2026-08-08.md` | Tenant isolation and API findings | Used for residual security-risk context. |
+The documented platform uses Firebase/GCP backend services and Vercel frontend hosting.
 
 ## Controller / Processor Position
 
-Working assumption for review: AlistraGIS is usually a processor for customer-controlled project, workforce and evidence data, while acting as controller for its own platform administration, billing/licence and support operations. This must be confirmed in the DPA and customer contract.
+Working assumption for professional review: AlistraGIS is usually a processor for customer-controlled project, workforce and evidence data, while acting as controller for its own platform administration, security, billing/licence, support and vendor-management operations. This must be confirmed in the DPA and customer contract and may differ for specific features or deployment models.
 
 ## Data and Processing Risks
 
-| Area | Risk | Current controls | Residual risk | Action |
-|---|---|---|---|---|
-| Tenant isolation | Cross-customer access to Firestore, Storage or Cloud Functions would expose commercially sensitive project data and personal data | Stage 2-4 work added/emulator-tested Firestore rule protections; API review found and fixed/deleted live-location BOLA paths; shared helper patterns enforce business membership | Wider black-box tenant isolation testing still required across APIs, Storage and UI flows | Complete Stage 30/31 regression and internal pen-test work before go-live |
-| Photographs and audit evidence | Site photos may incidentally include people, vehicles, homes or private property | Storage is business-scoped; uploads have route/type/size controls from Stage 5; live-location feature was removed | Retention is not automated; users may upload unnecessary personal data | Add retention enforcement and user guidance for evidence uploads |
-| Field-worker activity | Work packs, production logs, vehicle/plant check-outs and employee credentials can reveal who did what, where and when | Role-based access, server-side audit logging, no live GPS after Stage 13 cleanup | Audit and operational records are readable more broadly than strict privacy minimisation may require | Review audit/read access and retention with customers |
-| Location/geocoding | Permit location lookup sends selected coordinates to Nominatim; map tiles reveal viewed areas to tile provider/CDN | Only selected coordinate/tile requests sent; no app secrets in those calls | External services receive IP plus coordinate/tile request data | Disclose providers; review commercial terms; consider self-hosted/paid providers if needed |
-| FRIDAY AI | AI prompt could include personal/customer data; model output could leak data if tool scoping were weak | FRIDAY has one read-only tool, no caller-controlled business/project parameters, no retained prompt/reply text, no write capability, rate limits and paid-AI guard | NVIDIA processing terms/region not confirmed; future RAG/chat-history would change risk profile | Confirm NVIDIA DPA before enabling for customers; reassess on any AI capability expansion |
-| Audit logs | Logs contain user identifiers and actions; unbounded logs can become excessive | Logs are server-stamped and server-write-only; identity forgery fixed; admin/user-management events added | No retention/archival job; read access may be wider than necessary | Implement Data Retention Schedule and review log read permissions |
-| Support tickets | Tickets can contain account/security issues and free-text personal data | Ticket access is narrower than ordinary business collections; attachment URLs are constrained to same-business Storage | No deletion/retention workflow; sensitive user-provided text remains indefinitely | Add closed-ticket retention/archive/delete process |
-| Backups | Deletion backups can preserve deleted personal data beyond the active system | `backupAndDeleteCompany` creates manifest backup before destructive delete | No backup expiry job found; access model and encryption evidence not fully documented | Complete backup/restore stages before go-live |
-| Privileged accounts | Admin or platform-owner compromise could expose many records | Role gates, owner-email guard, MFA/auth hardening documented elsewhere | Admin login audit event not implemented; MFA status needs final operational confirmation | Finish auth hardening and monitoring |
+| Area | Risk | Current controls/evidence | Residual risk / action |
+|---|---|---|---|
+| Tenant isolation | Cross-customer access could expose commercially sensitive infrastructure and personal data | Firestore rule protections, business-membership helper patterns, API/security remediation and security regression evidence are documented | Complete broader black-box tenant-isolation/security regression before commercial go-live and repeat after material architecture changes |
+| Photographs/evidence | Site photos may include people, vehicles, homes/private property | Business-scoped Storage and upload controls | Retention enforcement and user guidance remain required |
+| Workforce activity | Work packs, audit logs, vehicles/plant and credentials can reveal who did what and when | Role controls, audit logging; unused live GPS removed | Review access/minimisation and customer retention choices |
+| Location/geocoding | Tile/geocoding providers receive browser IP plus tile/coordinate requests | Only requested map/geocode data is sent; no app secret deliberately sent | Disclose/review providers and commercial terms; consider contracted/self-hosted alternatives where needed |
+| FRIDAY AI | Prompt/tool context may include customer/personal data | Read-only tool design, caller scoping, no application retention of prompt/reply text | NVIDIA DPA/processing region still needs confirmation before customer enablement; reassess on RAG/chat history/write tools |
+| Audit logs | User identifiers/actions can become excessive if retained indefinitely | Server-side logging and identity hardening documented | No approved expiry/archive/minimisation enforcement yet |
+| Support tickets | Free text may contain account/security/personal information | Narrower access controls than ordinary collections | Retention/archive/delete process still required |
+| Backups | Deleted data may remain in protected backup cycles | Firestore PITR, daily backup with 30-day retention, daily append-only Storage mirror and successful isolated restore test now evidenced | Append-only Storage mirror requires approved retention enforcement; customer/privacy wording must explain backup cycle |
+| Privileged accounts | Admin/developer compromise can expose multiple records | Role gates/auth/security hardening documented | Final monitoring, incident ownership and operational verification required |
+| New utility sectors | Water/gas/power/renewables data can increase operational consequence of inaccurate records | Existing contract draft requires independent operational verification | Reassess DPIA/security/contract risk when each sector becomes production scope |
 
 ## Necessity and Proportionality
 
-The main processing is necessary for the product's purpose: managing fibre build/project operations and evidence. However, the platform must avoid collecting data it does not need. The Stage 13 removal of unused live GPS functions is the right privacy pattern: if a category is not operationally required, remove it rather than govern it indefinitely.
+The core processing is necessary for infrastructure GIS/project operations, but AlistraGIS should avoid collecting categories not needed for a defined feature. Removal of unused live GPS is the preferred privacy pattern: remove unnecessary collection rather than governing it indefinitely.
 
-Proportionality depends on completing the remaining P1 controls: retention, subprocessor confirmation, DSAR procedure, incident response, backup/restore test, monitoring and security regression testing.
+Proportionality before commercial pilot depends particularly on approved retention/enforcement, subprocessor/transfer confirmation, DSAR procedures, incident response and security regression testing.
 
-## High-Risk Features Reviewed
+## High-Risk / Change-Trigger Features
 
-| Feature | DPIA note |
+| Feature | DPIA position |
 |---|---|
-| Live GPS tracking | Removed from the codebase after confirming no UI integration. Reintroduction would require a fresh DPIA review before implementation. |
-| Site/property photographs | Potential personal data by context; requires upload guidance, retention and deletion processes. |
-| Employee/credential records | May include workforce compliance information; customers need clear role allocation and retention responsibility. |
-| FRIDAY AI | Current implementation is read-only and non-retentive, but provider terms and customer notice must be settled before commercial use. |
-| Street Manager permit extension | Sends permit/work-reference data to an external API if configured; provider and terms must be confirmed. |
+| Live GPS/worker tracking | Removed. Any reintroduction requires fresh DPIA/privacy/employment review before implementation. |
+| Site/property photographs | Potential personal data by context; requires guidance, access control and retention/deletion. |
+| Employee/credential records | Workforce/compliance information; role allocation and retention responsibilities must be explicit. |
+| FRIDAY AI | Current design is read-only/non-retentive in app logs, but provider terms/region must be settled before commercial use. |
+| AI chat history/RAG/document search | Not covered as a settled production feature; requires reassessment before enablement. |
+| Write-capable AI/agents | Requires a fresh DPIA/security/control assessment before production use. |
+| New utility sectors | Water, gas, power/electricity, renewables and wireless LOS should each trigger review of data categories, operational consequence and customer contract wording before production launch. |
+
+## Backup and recovery update — 7 September 2026
+
+The original August DPIA described backup/restore as incomplete. That statement is now superseded by later programme evidence:
+
+- [[Stage 20 Backup Implementation]] records Firestore PITR, daily backups with 30-day retention and a verified daily append-only Storage mirror as live.
+- [[Stage 21 Restore Test]] records an isolated Firestore restore passing on 11 August 2026 in 627.893 seconds, with production left unchanged and representative data/index/security checks completed.
+- Residual recovery work concerns wider frontend rollback, selective Storage restoration, application cutover/failover and deputy ownership under the disaster-recovery programme.
 
 ## Preliminary Outcome
 
-Current conclusion: **DPIA draft requires review; commercial pilot should not treat DPIA as complete until P1 actions are closed or accepted.**
+**DPIA prepared for professional review; not represented as legally approved or complete.**
 
-No single remaining issue appears to force an automatic no-go if the pilot is controlled and customer terms are explicit, but the combination of unimplemented retention, incomplete subprocessor confirmation and untested backup/restore remains a commercial-readiness blocker under the programme's own gates.
+No single identified issue in this engineering assessment automatically establishes that the service cannot be piloted. However, the commercial programme should not mark privacy readiness complete until the P1 retention, subprocessor/transfer, DSAR, incident-response and legal-role questions are closed or formally accepted for a controlled pilot.
 
 ## Required Actions
 
 | ID | Action | Priority | Status |
 |---|---|---|---|
 | DPIA-01 | Legal/privacy review of controller/processor split and whether a formal DPIA is legally required | P1 | Required |
-| DPIA-02 | Complete and enforce [[Data Retention Schedule]] | P1 | Required |
-| DPIA-03 | Confirm [[Subprocessor Register]] contract/DPA status and update privacy notice | P1 | Required |
-| DPIA-04 | Complete DSAR process and deletion/export runbook | P1 | Required |
-| DPIA-05 | Complete backup, restore test and disaster recovery plan | P1 | Required |
-| DPIA-06 | Run tenant-isolation/security regression tests across Firestore, Storage, APIs and Cloud Functions | P1 | Required |
-| DPIA-07 | Reassess before adding live tracking, FRIDAY chat history, RAG/document search, or write-capable AI tools | P1 | Required |
+| DPIA-02 | Approve and enforce [[Data Retention Schedule]] | P1 | Required |
+| DPIA-03 | Confirm [[Subprocessor Register]] DPA/region/transfer status and update privacy notice | P1 | Required |
+| DPIA-04 | Complete DSAR request register and deletion/export/minimisation runbook | P1 | Required |
+| DPIA-05 | Backup/isolated restore proof | P1 | Complete — see Stages 20/21 |
+| DPIA-06 | Complete remaining wider DR failover/cutover exercises and assign deputy | P1 | Required |
+| DPIA-07 | Run/refresh tenant-isolation/security regression across Firestore, Storage, APIs and Cloud Functions before go-live | P1 | Required |
+| DPIA-08 | Operationalise [[Data Breach and Incident Response]] and run tabletop exercise | P1 | Required |
+| DPIA-09 | Reassess before live tracking, AI history/RAG, write-capable AI, or production launch of additional utility sectors | P1 | Ongoing trigger |
+
+## Professional review questions
+
+1. Is a DPIA mandatory for the current product/service and intended B2B customers?
+2. Is the proposed controller/processor allocation correct, including support/security/licensing data?
+3. Are the residual risks and mitigations proportionate for a controlled pilot?
+4. Does US-EAST1 Storage processing require additional transfer/customer documentation or architecture change for intended UK customers?
+5. What retention/minimisation decisions should be made for audit logs, change logs, support tickets, workforce records and backups?
+6. What changes should automatically trigger a new DPIA rather than an ordinary review?
