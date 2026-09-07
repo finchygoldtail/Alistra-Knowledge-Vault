@@ -3,7 +3,7 @@ title: AlistraGIS Solicitor Review Pack
 status: ready-for-solicitor-review
 updated: 2026-09-07
 owner: Alistair
-related: ["[[Legal Pack Index]]", "[[01 Standard Terms and Conditions]]", "[[02 Software and SaaS Licence Agreement]]", "[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Subprocessor Register]]", "[[DPIA]]", "[[Data Subject Rights Procedure]]", "[[08 Privacy Notice and Website Legal Notices]]", "[[DPA Requirements]]", "[[Data Breach and Incident Response]]", "[[00 Commercial Readiness Dashboard]]"]
+related: ["[[Legal Pack Index]]", "[[01 Standard Terms and Conditions]]", "[[02 Software and SaaS Licence Agreement]]", "[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Subprocessor Register]]", "[[DPIA]]", "[[Data Subject Rights Procedure]]", "[[08 Privacy Notice and Website Legal Notices]]", "[[DPA Requirements]]", "[[Data Breach and Incident Response]]", "[[00 Commercial Readiness Dashboard]]", "[[2026-09-07 Red Item Remediation Update]]"]
 ---
 
 # AlistraGIS Solicitor Review Pack
@@ -24,303 +24,166 @@ The legal pack is already substantial. Drafts exist for Standard Terms and Condi
 
 The principal purpose of solicitor review is therefore **validation and correction of a prepared B2B SaaS/infrastructure legal framework**, not creation from a blank page.
 
-## 2. Commercial readiness position
+## 2. 7 September repository-backed remediation result
 
-### Strong/implemented technical evidence
+A fresh review of the current AlistraGIS `main` branch was completed before this pack was finalised. The detailed evidence note is [[2026-09-07 Red Item Remediation Update]].
 
-- Customer-data ownership and supplier-IP model is documented in the draft contracts.
-- Infrastructure/operational reliance language already requires customers to maintain operational checks and independently verify maps, network records, imported data and AI-assisted outputs before operational reliance.
-- GDPR data inventory was created from code-level inspection rather than generic assumptions.
-- Unused live-GPS backend functionality was removed after privacy review.
-- Current FRIDAY AI implementation is read-only and the application does not retain prompt/reply text in its audit logs.
-- Firestore Point-in-Time Recovery is enabled.
-- Daily Firestore backups with 30-day retention are active.
-- Uploaded files/photos have a separately verified daily append-only Storage mirror.
-- An isolated Firestore restore test passed on 11 August 2026 in 10 minutes 27.893 seconds without modifying production.
-- Security-rule testing after backup controls recorded 23 Firestore and 10 Storage rules tests passing.
+### Green / evidenced
 
-### Matters still requiring implementation or professional confirmation
+- Firestore Point-in-Time Recovery and daily Firestore backups are documented as active with 30-day retention.
+- A separately verified append-only Storage mirror and an isolated restore test are documented; the managed Firestore restore completed in 627.893 seconds without modifying production.
+- The current `main` branch contains a guarded `backupAndDeleteCompany` workflow. For activated companies it collects Firestore/Auth/Storage backup material, writes a restore manifest, recursively deletes the business Firestore tree, deletes company Storage content and removes company Auth users other than the caller, subject to platform-owner/SuperAdmin safeguards and explicit confirmation.
+- The storage-profile model exposes `backupPolicy.retentionDays`, `dataPolicy.retentionDays`, `dataPolicy.deletionAfterTerminationDays` and `exportRequiredOnTermination`.
+- A repository Cloud Storage lifecycle rule deletes non-current object versions 30 days after they become non-current.
+- The incident-response document is no longer empty; an operational runbook has been drafted.
 
-1. Final data-retention periods and automated/manual enforcement.
-2. Per-user DSAR location/export/deletion/minimisation runbook or tooling.
-3. Final subprocessor DPAs, regions, log retention and international-transfer position.
-4. Formal DPIA/legal privacy review and controller/processor confirmation.
-5. Incident-response ownership, notification review and tabletop exercise.
-6. Final legal business identity and commercial placeholders throughout customer agreements.
-7. Final liability exclusions/caps and infrastructure-risk allocation.
-8. Final DPA/customer contract structure.
-9. Commercial/API/map provider licence review where public/free services are currently used.
+### Amber / implementation or verification remains
+
+- Retention policy/configuration exists but no general application-data retention worker has been evidenced for live tickets, audit events, asset-change logs, evidence files or similar operational records.
+- Existing deletion/export capabilities do not yet form one unified per-person DSAR locator/export/erasure workflow across Auth, Firestore, historical references and files.
+- Provider DPA/region/log-retention/transfer facts require live account-level verification.
+- Wider DR drills and incident-response tabletop/ownership remain.
+
+### Reserved for professional decision
+
+- final retention periods and lawful exceptions;
+- controller/processor allocation;
+- international-transfer mechanism/wording;
+- DPA and privacy-notice approval;
+- infrastructure liability caps/exclusions and operational-reliance wording;
+- final third-party/API/map licensing interpretation.
 
 ## 3. Product and infrastructure risk context
 
 AlistraGIS is not merely a generic office SaaS product. It can hold or display infrastructure/network records, map assets, operational evidence, workforce records, photographs, permits, work packs, audit events and other project information. Planned sectors increase the importance of careful contractual risk allocation because records may relate to telecoms, water, gas, electricity, renewables or wireless infrastructure.
 
-The contracts should make clear, subject to solicitor approval, that:
-
-- the customer owns Customer Data;
-- AlistraGIS retains ownership of its software, APIs, schemas, documentation, designs, methods and improvements;
-- the customer is responsible for the accuracy and lawful supply of Customer Data;
-- AlistraGIS is a system for recording, displaying, managing and analysing information and is not a substitute for statutory searches, engineering verification, safe-working procedures, surveys or other checks required before physical works;
-- maps, imported data, AI-assisted output and network records require appropriate independent verification before operational/safety reliance;
-- liability caps/exclusions must be appropriate to customer type, contract value and insurable risk.
+The contracts should make clear, subject to solicitor approval, that the customer owns Customer Data; AlistraGIS retains ownership of its software, APIs, schemas, documentation, designs, methods and improvements; the customer is responsible for the accuracy and lawful supply of Customer Data; AlistraGIS is a system for recording, displaying, managing and analysing information and is not a substitute for statutory searches, engineering verification, safe-working procedures, surveys or other checks required before physical works; maps, imported data, AI-assisted output and network records require appropriate independent verification before operational/safety reliance; and liability caps/exclusions must be appropriate to customer type, contract value and insurable risk.
 
 **Solicitor question:** Are the existing limitation/exclusion provisions enforceable and appropriately drafted for B2B UK infrastructure customers, and should particular losses or safety/utility scenarios have separate caps or carve-outs?
 
 ## 4. Data protection role allocation
 
-### Working model
+Working model: for customer-controlled project/workforce/evidence data the customer is normally controller and the AlistraGIS supplier entity normally processor. For AlistraGIS's own account, support, security, licence/billing and vendor records, AlistraGIS is controller where it determines the purposes/means. This is a working engineering/commercial model only.
 
-For customer-controlled project/workforce/evidence data:
+**Solicitor/privacy questions:** Is this split correct for the proposed service and hosting models? Are there activities where AlistraGIS is an independent or joint controller? Does the proposed DPA adequately cover UK processor requirements? What should change for client-hosted/dedicated deployments?
 
-- Customer: normally controller.
-- AlistraGIS supplier entity: normally processor.
+## 5. Data retention - current technical red
 
-For AlistraGIS's own account, support, security, licence/billing and vendor records:
-
-- AlistraGIS supplier entity: controller where it determines the purposes/means.
-
-This is a working engineering/commercial model only.
-
-**Solicitor/privacy questions:**
-
-1. Is the controller/processor split correct for the proposed service and hosting models?
-2. Are there activities where AlistraGIS is likely to be an independent or joint controller despite the customer-owned-data model?
-3. Does the proposed DPA adequately cover Article 28/UK requirements for the service?
-4. What should change for client-hosted/dedicated deployments?
-
-## 5. Data retention — current red item
-
-The code currently supports some manual deletion but there is no general automated retention worker enforcing the Data Retention Schedule.
+The application now has a clear configuration surface for retention, and non-current Storage versions have a 30-day lifecycle rule, but configuration is not the same as enforcement. No general scheduled retention worker has been evidenced for application records.
 
 Known current position:
 
-- user/Auth/profile deletion exists through `deleteLoginUser`;
-- whole-company backup-and-delete exists through `backupAndDeleteCompany`;
-- employee and various domain-specific deletion functions exist;
-- support tickets/ticket events do not currently have a defined expiry/delete workflow;
-- `assetChangeLogs` and `auditEvents` are currently unbounded unless operationally removed;
+- whole-company backup-and-delete is implemented in `main`;
+- support tickets/ticket events do not evidence automatic expiry;
+- asset-change and audit history require an approved archive/delete/anonymisation policy;
 - project/map/evidence records are generally retained until changed/deleted/company deletion;
 - FRIDAY prompt/reply content is not retained by the application;
-- Firestore scheduled backups have 30-day retention;
-- the append-only Storage mirror is deliberately recovery-safe and needs an approved retention/deletion process of its own;
-- Google/platform logging retention needs confirmation from live account settings.
+- Firestore scheduled backups are documented with 30-day retention;
+- the append-only Storage mirror and tenant-deletion backups require an approved retention/deletion process of their own;
+- Google/platform logging retention needs live-account confirmation.
 
-### Proposed policy direction for solicitor review
+### Engineering that can proceed before legal sign-off
 
-Do not turn the following into customer promises until approved. Proposed approach:
+AlistraGIS can build a configurable retention worker that reads approved policy values and initially runs in dry-run/report-only mode. Destructive deletion should not be enabled merely to make the dashboard green. Final periods and exceptions should be approved before they become customer commitments.
 
-- active account/profile data: active relationship plus only the period justified after closure/termination;
-- closed support tickets: defined support/dispute period;
-- audit/security events: defined security/fraud/dispute period, with minimisation/anonymisation where appropriate;
-- site photographs and infrastructure evidence: customer-agreed project/evidence period;
-- project/map asset data: active project/customer term plus agreed exit/export window, subject to legal holds;
-- employee/credential data: customer-defined employment/compliance need and applicable legal obligations;
-- billing/contract records: accounting/tax/contract period confirmed by accountant/solicitor;
-- backups: documented protected cycle plus legal-hold exception;
-- expired rate-limit/temporary security records: short operational period only.
+**Solicitor questions:** What default periods should apply to each category, which should be customer-configurable, and which categories should be retained or anonymised despite an erasure request for legal/security/audit reasons?
 
-**Solicitor questions:** What default periods should AlistraGIS use for each category, which should be customer-configurable, and which categories should be retained/anonymised despite an erasure request for legal/security/audit reasons?
+## 6. Data-subject rights, deletion and export - current red/amber
 
-### Required engineering after legal decision
+Existing tooling provides strong whole-company exit/deletion capability and partial domain/user deletion/export capabilities, but there is no single DSAR-specific per-person locator/export/erasure workflow.
 
-- implement a scheduled retention worker and/or formally controlled manual runbook;
-- enforce expiry for closed tickets, temporary rate-limit records and deletion backups where appropriate;
-- implement approved audit/change-log archive/delete/anonymisation policy;
-- verify Firebase/GCP log retention and backup lifecycle settings;
-- document customer-specific retention choices during onboarding.
+The required scope includes Firebase Auth, root/business user profiles, tickets/events, asset-change logs, audit events, employee/credential records, vehicle/plant/crew/work-pack references, files/photos and AlistraGIS-controlled billing/licence/support records.
 
-## 6. Data-subject rights, deletion and export — current red/amber item
+Proposed operational model: identify whether AlistraGIS or the customer is controller for the requested data; verify identity/authority; for customer-controlled data act on documented customer instruction; produce a scoped export rather than an unrestricted tenant dump; delete where permitted and minimise/anonymise retained history where legitimate retention remains; document backup-cycle implications; and record the request, decision, actions and completion evidence.
 
-Existing tooling can delete accounts and many domain records, and can export various operational/commercial data, but there is no single DSAR-specific per-user locator/export/erasure tool.
+**Solicitor questions:** Confirm response requirements, verification standard, processor assistance obligations, treatment of audit/safety/contract records, backup handling and wording for the privacy notice/DPA.
 
-The documented DSAR scope includes Firebase Auth, root and business user profiles, tickets/events, asset-change logs, audit events, employee/credential records, vehicle/plant/crew/work-pack references, files/photos and AlistraGIS-controlled billing/licence/support records.
+## 7. Subprocessors and international transfers
 
-Proposed operational model:
+Identified providers include Google Firebase/GCP, Vercel, GitHub, conditional NVIDIA FRIDAY processing, CARTO/OpenStreetMap tile infrastructure and Nominatim, with optional/future Azure/AWS storage and configured Street Manager services.
 
-- identify whether AlistraGIS or the customer is controller for the requested data;
-- verify identity/authority;
-- for customer-controlled data, act on the customer's documented instruction under the DPA rather than independently deciding the request;
-- produce a scoped export, not an unrestricted whole-tenant dump;
-- delete where permitted and minimise/anonymise retained history where a legitimate retention requirement remains;
-- document backup-cycle implications;
-- record the request, decision, actions and completion evidence.
+Firestore production is documented in `europe-west2`, while the production upload bucket and private Storage backup bucket have previously been documented as `US-EAST1`. This must be verified against the live accounts and reviewed before making UK/EU-only residency commitments.
 
-**Solicitor questions:** Confirm statutory response requirements, verification standard, processor assistance obligations, treatment of audit/safety/contract records, backup handling and wording for the privacy notice/DPA.
+**Solicitor/privacy questions:** Review the supplier/subprocessor chain and transfer mechanisms; advise what must appear in the DPA/privacy notice/subprocessor list; advise on the Storage location once live settings are confirmed; confirm whether NVIDIA requires additional contractual/region controls; and review whether public map/geocoding services are suitable for intended commercial use.
 
-## 7. Subprocessors and international transfers — current red/amber item
+## 8. DPIA and incident response
 
-### Confirmed/identified providers
+The engineering-led DPIA has been updated so that backup/restore is no longer described as untested. Key residual privacy risks include cross-tenant access, photographs/evidence, workforce activity, location/geocoding exposure, AI processing, audit logs, support tickets, backups and privileged accounts.
 
-- Google Firebase / Google Cloud Platform — Auth, Firestore, Storage, Functions, Secret Manager and platform logging.
-- Vercel — frontend hosting and browser/request delivery.
-- GitHub — source code, developer/commit metadata and deployment workflow; production customer data is not intended to be stored there.
-- NVIDIA — conditional FRIDAY AI model endpoint when enabled.
-- CARTO / OpenStreetMap tile infrastructure — client-side basemap requests.
-- OpenStreetMap Nominatim — client-side reverse geocoding for selected coordinates.
+A full incident-response draft now covers cross-tenant disclosure, credential compromise, accidental disclosure/deletion, secret exposure, malicious uploads/abuse, unauthorised exports, deployment/source compromise, subprocessor incidents and availability incidents. It requires incident recording, evidence preservation, containment, scope/data-impact analysis, legal/privacy escalation, notification where required, recovery verification and post-incident corrective action.
 
-### Conditional providers/features
+Remaining operational work includes incident owner/deputy assignment, a live incident register, contact verification, a tabletop breach exercise and remaining DR drills.
 
-- Microsoft Azure — optional future/customer storage profile.
-- AWS — optional future/customer storage profile.
-- Street Manager API provider — permit-extension workflow when configured.
-- Google Maps — external directions links after user click.
+## 9. Backup and recovery evidence
 
-### Important current infrastructure fact
-
-Firestore production is documented in `europe-west2`, but the production upload bucket and private Storage backup bucket are currently documented as `US-EAST1`. This requires explicit privacy/contract/transfer review before commercial commitments about UK/EU-only data residency are made.
-
-**Solicitor/privacy questions:**
-
-1. Review the supplier/subprocessor contract chain and transfer mechanisms.
-2. Advise what must appear in the customer DPA/privacy notice/subprocessor list.
-3. Advise whether the current US-EAST1 Storage location is acceptable for intended UK customers and what transfer documentation is required.
-4. Confirm whether NVIDIA should remain disabled until a suitable DPA/processing-region position is established.
-5. Review whether public CARTO/OSM/Nominatim services are suitable for commercial customer use or should be replaced with contracted providers/self-hosted alternatives.
-
-## 8. DPIA — current red item prepared for review
-
-An engineering-led DPIA already exists. Key risks identified include cross-tenant access, photographs/evidence, workforce activity, location/geocoding exposure, AI processing, audit logs, support tickets, backups and privileged accounts.
-
-Privacy-positive controls include removal of unused live GPS, business-scoped storage/access controls, server-side audit work, read-only FRIDAY design and non-retention of FRIDAY prompt/reply content in application logs.
-
-The older DPIA listed backup/restore as incomplete. That factual position is now superseded: backup implementation is complete and an isolated restore test passed. Remaining recovery work concerns wider DR/failover/cutover exercises rather than proving that Firestore backup restoration works.
-
-**Solicitor/privacy questions:**
-
-- Is a formal DPIA mandatory for the current processing, and if so is the engineering-led DPIA a suitable foundation?
-- What residual risks/actions must be closed before a controlled B2B pilot?
-- What events must trigger a new DPIA (e.g. live worker tracking, AI chat history/RAG, write-capable AI, new utility sectors, sensitive workforce processing)?
-
-## 9. Incident response — Stage 23
-
-A full engineering/operations incident-response draft has now been created at [[Data Breach and Incident Response]]. It covers cross-tenant disclosure, credential compromise, accidental disclosure/deletion, secret exposure, malicious uploads/abuse, unauthorised exports, deployment/source compromise, subprocessor incidents and availability incidents.
-
-The runbook requires incident recording, evidence preservation, containment, scope/data-impact analysis, legal/privacy escalation, customer notification where required, recovery verification and post-incident corrective action.
-
-**Solicitor/privacy questions:** Confirm notification decision process and deadlines, controller/processor communication duties, required customer-contract wording and what incident categories must be reported to customers even where regulatory notification is not required.
-
-## 10. Backup, recovery and disaster recovery
-
-Evidence currently records:
-
-- Firestore PITR enabled;
-- daily Firestore backups with 30-day retention;
-- daily append-only Storage mirror;
-- Storage versioning and soft-delete controls;
-- isolated Firestore restore successful on 11 August 2026;
-- restore duration 627.893 seconds;
-- restored representative businesses/users/assets/work packs/tickets/audit events/change logs;
-- production integrity preserved;
-- 23 Firestore and 10 Storage rules tests passed after the recovery controls were applied.
+Evidence currently records Firestore PITR; daily Firestore backups with 30-day retention; daily append-only Storage mirror; Storage versioning/soft-delete controls; successful isolated Firestore restore on 11 August 2026; restore duration 627.893 seconds; restored representative business/user/asset/work-pack/ticket/audit/change-log data; production integrity preserved; and security-rule tests after recovery controls.
 
 Residual DR work includes frontend rollback, selective Storage restoration, application cutover to restored database and deputy recovery-owner assignment.
 
-**Solicitor question:** Ensure SLA/RTO/RPO wording does not promise more than the tested service-level recovery capability and clarify customer responsibilities for customer-hosted deployments.
+**Solicitor question:** Ensure SLA/RTO/RPO wording does not promise more than tested service-level recovery capability and clarify customer responsibilities for customer-hosted deployments.
 
-## 11. Legal entity and contract placeholders
+## 10. Priority solicitor questions
 
-Before signature/publication, the legal pack still needs the final supplier details inserted consistently:
+1. Is the proposed customer-controller / AlistraGIS-processor model correct, and where is AlistraGIS independently a controller?
+2. What DPA terms are required for the current hosting, support, security and subprocessor model?
+3. What retention periods should be approved by data category, and which records should be anonymised rather than deleted?
+4. How should backups, security/audit evidence and legal/accounting records be handled when an erasure request is received?
+5. Are the documented provider locations/transfers acceptable once verified, and what transfer mechanism/disclosure is required?
+6. Does the DPIA require formal completion before pilot and what changes are triggered by water, gas, power, renewables and wireless LOS expansion?
+7. What customer notification/regulatory escalation wording should be included in incident response and contracts?
+8. What liability cap/exclusions are appropriate for infrastructure GIS records, and how should the contract state that GIS does not replace statutory searches, surveys or safe-work/engineering verification?
+9. Are customer-data ownership, supplier-IP, export and termination/deletion clauses appropriately structured?
+10. Do mapping, geocoding, AI and other API licences permit the intended B2B SaaS use?
+11. What insurance/liability alignment should be considered for the intended customers and contract values?
+12. Which remaining items are must-fix before the first paying customer and which are acceptable for a controlled pilot?
 
-- legal business name/trading name;
-- company number;
-- registered office;
-- VAT number if applicable;
-- legal/privacy/support contact addresses;
-- pricing/payment terms;
-- support hours;
-- hosting model;
-- named subprocessors;
-- insurance levels;
-- final liability caps;
-- order-form/renewal choices;
-- dispute-resolution choices.
-
-**Solicitor task:** perform a consistency review across the Terms, SaaS Licence, DPA, SLA, Onboarding Agreement, Privacy Notice and order-form structure so definitions, precedence, liability, termination, data export/deletion and hosting responsibilities align.
-
-## 12. Intellectual property and third-party licensing
-
-The vault contains an IP/brand section, source-code ownership record, trademark plan/clearance record, third-party licence register, THIRD_PARTY_NOTICES and API licence requirements.
-
-**Solicitor task:** review software/IP ownership chain, customer licence grant, contractor/AI-assisted development implications if relevant, third-party notices, trademark strategy and any restrictions created by mapping/API providers.
-
-## 13. Documents supplied for review
+## 11. Documents supplied for review
 
 ### Core customer contracts
 
-1. [[01 Standard Terms and Conditions]]
-2. [[02 Software and SaaS Licence Agreement]]
-3. [[03 Service Level Agreement]]
-4. [[04 Customer Onboarding Agreement]]
-5. [[05 Mutual Non-Disclosure Agreement]]
+- [[01 Standard Terms and Conditions]]
+- [[02 Software and SaaS Licence Agreement]]
+- [[03 Service Level Agreement]]
+- [[04 Customer Onboarding Agreement]]
+- [[05 Mutual Non-Disclosure Agreement]]
 
-### Privacy/data protection
+### Privacy and data protection
 
-6. [[03 GDPR Data Register]]
-7. [[Data Retention Schedule]]
-8. [[Subprocessor Register]]
-9. [[DPIA]]
-10. [[Data Subject Rights Procedure]]
-11. [[08 Privacy Notice and Website Legal Notices]]
-12. [[DPA Requirements]]
-13. [[GDPR Responsibilities]]
-14. [[Data Breach and Incident Response]]
+- [[03 GDPR Data Register]]
+- [[Data Retention Schedule]]
+- [[Subprocessor Register]]
+- [[DPIA]]
+- [[Data Subject Rights Procedure]]
+- [[08 Privacy Notice and Website Legal Notices]]
+- [[DPA Requirements]]
+- [[GDPR Responsibilities]]
+- [[Data Breach and Incident Response]]
+- [[2026-09-07 Red Item Remediation Update]]
 
-### Licensing/IP/commercial
+### Technical evidence
 
-15. [[10 Third Party Licence Register]]
-16. [[11 THIRD_PARTY_NOTICES]]
-17. [[API Licence Requirements]]
-18. [[Data Ownership]]
-19. [[Licensing Options]]
-20. [[Intellectual Property Index]]
+- [[00 Commercial Readiness Dashboard]]
+- [[Stage 20 Backup Implementation]]
+- [[Stage 21 Restore Test]]
+- [[09 Disaster Recovery Plan]]
+- [[Security Overview]]
+- [[API Security Assessment]]
+- [[Security Remediation]]
+- [[Audit Logging]]
+- [[Vercel Deployment]]
+- [[Firebase Infrastructure]]
 
-### Technical evidence relevant to contractual promises
-
-21. [[00 Commercial Readiness Dashboard]]
-22. [[Stage 20 Backup Implementation]]
-23. [[Stage 21 Restore Test]]
-24. [[09 Disaster Recovery Plan]]
-25. [[Security Overview]]
-26. [[API Security Assessment 2026-08-08]]
-27. [[Security Remediation 2026-08-11]]
-28. [[Audit Logging]]
-29. [[Vercel Deployment]]
-30. [[Firebase Infrastructure]]
-
-## 14. Priority questions for the solicitor
-
-Please prioritise answers to these questions before general drafting polish:
-
-1. Is the proposed B2B customer/controller and AlistraGIS/processor model correct?
-2. Is the DPA structure sufficient and what must change?
-3. Are the Terms/SaaS liability caps, exclusions and operational-verification clauses suitable for infrastructure GIS use?
-4. What default retention periods should be adopted and which must be customer-configurable?
-5. How should audit/change logs, support records and backups be treated when erasure is requested?
-6. Are the current subprocessors/transfer arrangements suitable, particularly US-EAST1 Firebase Storage and conditional NVIDIA processing?
-7. Is a DPIA legally required now and what changes are needed to the existing draft?
-8. What incident/breach notification wording and deadlines should appear in the DPA/customer contracts/runbook?
-9. What wording is needed to avoid AlistraGIS being treated as a substitute for statutory utility searches, engineering verification or safe-working processes?
-10. Are the customer data ownership, supplier IP and exit/export/deletion provisions robust?
-11. Are any mapping/geocoding/API licences unsuitable for commercial use?
-12. What insurance types/limits should be aligned with the contractual liability caps?
-
-## 15. Recommended review output requested from solicitor
+## 12. Requested solicitor outputs
 
 Please provide:
 
-- redline/revised Terms and Conditions;
-- redline/revised SaaS Licence Agreement;
-- final or model Data Processing Agreement;
-- review of Privacy Notice and cookie wording;
-- confirmed controller/processor analysis;
-- approved/default retention positions or advice on how to set them;
-- review of DPIA and incident-response obligations;
-- review of liability/risk allocation for infrastructure data;
-- review of third-party/API licensing issues;
-- list of issues that must be resolved before first paying customer versus issues that may be completed during a controlled pilot.
+1. redline/finalise Standard Terms and SaaS Licence Agreement;
+2. confirm/prepare DPA and controller/processor analysis;
+3. review Privacy Notice/cookie wording, retention approach, DPIA and incident-response obligations;
+4. confirm infrastructure-specific liability and operational-reliance clauses;
+5. review third-party/API licensing and international-transfer issues;
+6. identify must-fix-before-first-customer items separately from matters acceptable for a controlled pilot.
 
-## 16. Current conclusion
+## Conclusion
 
-AlistraGIS has substantial legal, security and commercial preparation already documented. The main remaining legal-readiness work is no longer identifying what documents exist; it is **professional validation of the prepared contract/privacy framework and turning approved policy decisions into enforceable operational controls**.
-
-Until that review and the remaining P1 engineering controls are completed, the legal documents should remain marked as drafts and should not be represented as solicitor-approved or final customer terms.
+AlistraGIS has substantial commercial, privacy and recovery preparation in place. The repository-backed review confirms that the principal technical gap is no longer backup/restore. Remaining engineering/privacy work is retention enforcement, unified per-person DSAR tooling, provider-setting verification and operational exercises. The legal work is now primarily professional validation of policy values, role allocation, contracts, transfers and infrastructure liability rather than drafting from a blank page.
