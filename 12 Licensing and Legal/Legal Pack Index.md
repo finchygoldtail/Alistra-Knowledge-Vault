@@ -6,7 +6,9 @@
 
 **Start here:** [[00 Solicitor Review Pack 2026-09-07]]
 
-The solicitor review pack consolidates the product/commercial context, current technical evidence, outstanding commercial-readiness risks, privacy/data-protection questions, infrastructure liability issues and the exact documents/questions recommended for professional review.
+**Latest technical remediation evidence:** [[2026-09-07 Red Item Remediation Update]]
+
+The solicitor review pack consolidates the product/commercial context, current technical evidence, outstanding commercial-readiness risks, privacy/data-protection questions, infrastructure liability issues and the exact documents/questions recommended for professional review. The 7 September remediation note records the repository-backed distinction between implemented controls, engineering work still required and matters deliberately reserved for professional judgement.
 
 ## Core customer documents
 
@@ -42,24 +44,14 @@ The solicitor review pack consolidates the product/commercial context, current t
 
 ## Required company details before use
 
-Replace all placeholders in square brackets, including:
+Replace all placeholders in square brackets, including legal business name and trading name, company number and registered office, VAT number if registered, contact/legal-notice addresses, data-protection contact, pricing/payment/support terms, hosting model/subprocessors, insurance/liability caps and governing-law/dispute choices.
 
-- Legal business name and trading name
-- Company number and registered office
-- VAT number, if registered
-- Contact and legal-notice email addresses
-- Data-protection contact
-- Pricing, payment terms and support hours
-- Hosting model and named subprocessors
-- Insurance levels and liability caps
-- Governing-law and dispute-resolution choices
-
-## Current professional-review priorities — 7 September 2026
+## Current professional-review priorities - 7 September 2026
 
 1. Controller/processor analysis and final DPA structure.
 2. Liability caps/exclusions and operational-verification wording for infrastructure GIS.
 3. Approved retention periods and erasure/minimisation treatment for audit, support, workforce and backup records.
-4. Subprocessor/region/international-transfer review, including documented US-EAST1 Storage processing.
+4. Subprocessor/region/international-transfer review, including verification of documented Storage location.
 5. DPIA review and change triggers for new sectors/AI/location functionality.
 6. Incident/breach notification obligations and customer-contract wording.
 7. Privacy Notice/cookie publication review against actual production configuration.
@@ -67,27 +59,21 @@ Replace all placeholders in square brackets, including:
 
 ## Technical status relevant to legal review
 
-Backup implementation and isolated Firestore restore proof are complete under [[Stage 20 Backup Implementation]] and [[Stage 21 Restore Test]]. The current principal gap is policy enforcement/operationalisation: retention automation/manual controls, DSAR runbooks, subprocessor confirmations, incident-response exercises and final professional legal decisions.
+Backup implementation and isolated Firestore restore proof are complete under [[Stage 20 Backup Implementation]] and [[Stage 21 Restore Test]]. Repository review on 7 September also confirmed a guarded whole-company backup-and-delete workflow, explicit retention-policy fields and a 30-day non-current Storage-version lifecycle rule.
+
+The principal remaining technical gap is **retention enforcement and unified per-person DSAR tooling**, followed by live provider-setting verification and operational exercises. Final retention values, role allocation, transfer mechanisms, DPA wording and infrastructure liability remain professional legal/privacy decisions.
 
 ## Recommended review order
 
 1. Read [[00 Solicitor Review Pack 2026-09-07]].
-2. Confirm business structure and ownership of software/source code.
-3. Review customer-facing Terms, SaaS Licence, DPA requirements, SLA and onboarding structure together.
-4. Review privacy/data-protection pack and approve/adjust retention, processor and transfer positions.
-5. Review infrastructure liability and insurance alignment.
-6. Review third-party/API licences and IP/brand position.
-7. Ask accountant to confirm VAT, revenue recognition, payroll and software-development treatment.
+2. Read [[2026-09-07 Red Item Remediation Update]] for current implementation evidence.
+3. Confirm business structure and ownership of software/source code.
+4. Review customer-facing Terms, SaaS Licence, DPA requirements, SLA and onboarding structure together.
+5. Review privacy/data-protection pack and approve/adjust retention, processor and transfer positions.
+6. Review infrastructure liability and insurance alignment.
+7. Review third-party/API licences and IP/brand position.
+8. Ask accountant to confirm VAT, revenue recognition, payroll and software-development treatment.
 
 ## Version control
 
-Each signed customer contract should record:
-
-- Document version
-- Effective date
-- Customer legal name
-- Order form or statement of work
-- Hosting model
-- Number and type of licensed users
-- Price and renewal date
-- Named authorised signatories
+Each signed customer contract should record document version, effective date, customer legal name, Order Form/SOW, hosting model, licensed users, price/renewal date and authorised signatories.
