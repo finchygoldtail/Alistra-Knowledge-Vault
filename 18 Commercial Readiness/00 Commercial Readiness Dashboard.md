@@ -1,7 +1,7 @@
 ---
 status: draft
-updated: 2026-08-21
-related: ["[[Current State Validation 2026-08-08]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]"]
+updated: 2026-09-07
+related: ["[[Current State Validation 2026-08-08]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]", "[[2026-09-07 Red Item Remediation Update]]"]
 ---
 
 # Commercial Readiness Dashboard
@@ -15,23 +15,35 @@ This folder does not replace the existing legal, security, infrastructure or arc
 | Stage | File | Status | Result |
 |---|---|---|---|
 | 11 | [[Cost and Abuse Protection]] | Complete | App Check live but not enforced (staged: watch metrics, then enable per service); per-user rate limiting live on twelve callables; Firestore TTL on the counters active. |
-| 14 | [[04 Data Retention Schedule]] | Drafted | Policy drafted; enforcement not implemented. |
-| 15 | [[05 Subprocessor Register]] | Drafted | Providers identified; DPA/region checks remain. |
-| 16 | [[06 DPIA]] | Drafted | Privacy risks assessed; legal/privacy review required. |
-| 17 | [[07 Data Subject Rights Procedure]] | Drafted | Procedure drafted; tooling/runbook gaps remain. |
-| 18 | [[18 DPA Requirements]] | Drafted | Solicitor-input requirements created. |
-| 19 | [[19 API Licence Requirements]] | Drafted | API licence requirements created. |
+| 14 | [[04 Data Retention Schedule]] | Amber - mechanism pending | Policy/configuration surface exists. Storage profiles expose retention/deletion fields and non-current Storage versions have a 30-day lifecycle rule, but general application-data retention enforcement is not implemented. |
+| 15 | [[05 Subprocessor Register]] | Amber - verification pending | Providers identified from implementation; live DPA/region/log-retention/transfer checks remain. |
+| 16 | [[06 DPIA]] | Amber - professional review | Privacy risks assessed and backup/restore evidence updated; legal/privacy review remains required. |
+| 17 | [[07 Data Subject Rights Procedure]] | Amber - tooling pending | Procedure and partial deletion/export capabilities exist. A unified per-person locator/export/erasure workflow is still required. |
+| 18 | [[18 DPA Requirements]] | Solicitor review | Engineering requirements prepared; final legal terms require solicitor input. |
+| 19 | [[19 API Licence Requirements]] | Solicitor review | API licence requirements prepared; final commercial/legal terms require review. |
 | 20 | [[Stage 20 Backup Implementation]] | Complete | Firestore PITR/daily backups and a verified daily append-only Storage mirror are live. |
 | 21 | [[Stage 21 Restore Test]] | Passed | Isolated restore completed in 10m 27.893s; data/index/security checks passed and the temporary target was removed. |
-| 22 | [[09 Disaster Recovery Plan]] | Implemented | Recovery priorities and all required failure scenarios are documented; three failover/restore drills and deputy assignment remain before pilot. |
-| Commercial billing architecture | [[Commercial Allocation Billing Architecture]] | Awaiting live test | Money-out chain complete and deployed: the export now states the certified value, and subcontractor invoices are recorded and matched with a one-invoice-per-valuation guard. One real allocation taken through to a paid invoice on live Firebase is all that remains. Money in is not started. |
+| 22 | [[09 Disaster Recovery Plan]] | Implemented / drills pending | Recovery priorities and failure scenarios documented; wider frontend/Storage/cutover drills and deputy assignment remain before pilot. |
+| 23 | [[Data Breach and Incident Response]] | Drafted / exercise pending | Operational runbook now exists. Incident owner/deputy, live register, contact verification and tabletop exercise remain. |
+| Commercial billing architecture | [[Commercial Allocation Billing Architecture]] | Awaiting live test | Money-out chain complete and deployed. One real allocation taken through to a paid invoice on live Firebase remains; money in is not started. |
+
+## 7 September 2026 evidence update
+
+See [[2026-09-07 Red Item Remediation Update]] for the repository-backed review.
+
+The current `main` repository confirms that `backupAndDeleteCompany` can create an exit backup for an activated company and then recursively delete its business Firestore tree, company Storage content and company Auth users subject to SuperAdmin/owner safeguards. This is strong whole-company exit/deletion capability, but it does not replace a per-data-subject DSAR workflow.
+
+The storage-profile model contains `backupPolicy.retentionDays`, `dataPolicy.retentionDays`, `dataPolicy.deletionAfterTerminationDays` and `exportRequiredOnTermination`. A repository lifecycle rule also deletes non-current Storage object versions after 30 days. These are useful controls, but no general retention worker has yet been evidenced for live tickets, audit events, asset change logs, evidence files or other operational records.
 
 ## Current Go-Live Position
 
-Stages 20 and 21 are passed and the Stage 22 disaster-recovery plan is implemented. Before pilot, the DR exercises must still prove frontend rollback, selective Storage restoration and application cutover to a restored database, and a deputy recovery owner must be assigned. Stage 23 incident response is next. Other recorded commercial-readiness dependencies remain in their stage files.
+The biggest engineering/privacy gap is now **enforcement and per-person tooling**, not backup/recovery. Stages 20 and 21 remain evidenced as complete/passed. Stage 22 is materially implemented and Stage 23 has an operational draft.
 
-Stage 11 closed on 2026-08-21: App Check and per-user rate limiting are both deployed. One step remains and it is not code -- App Check enforcement is a Firebase console setting, held back until verified requests hold near 100% for several days, because switching it on early locks out every real user.
+Before a controlled commercial pilot, priority technical work is:
 
-Billing moved a long way on 2026-08-21 and is closer to done than it looked, because most of it already existed under another name: an allocation is an area, and the chain through to a certified value signed off by a second person was already running. What is left of the money-out side is not code -- it is one real allocation taken through to a paid invoice on live Firebase.
+1. configurable retention enforcement with dry-run/reporting before destructive deletion;
+2. a unified DSAR locator/export/minimisation or erasure workflow;
+3. live subprocessor region/log/DPA verification;
+4. incident-response tabletop and remaining DR drills.
 
-The gap that now stands out most is **enforcement rather than policy**: the Data Retention Schedule (stage 14) still enforces nothing, since the only automated deletion anywhere in the project is the TTL on rate limit counters.
+Final retention periods, controller/processor allocation, transfer mechanisms, DPA wording and liability terms remain matters for professional legal/privacy review. They must not be marked complete merely by changing documentation or inventing policy values in code.
