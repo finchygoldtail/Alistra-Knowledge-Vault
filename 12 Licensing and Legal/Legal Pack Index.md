@@ -19,10 +19,10 @@ Recommended structure for new customers:
 1. [[13 Client Framework Agreement]] — reusable master commercial/legal framework.
 2. [[14 Client Order Form and Service Schedule]] — customer-specific modules, users, projects, hosting, support, implementation and price.
 3. [[15 Hosting and Data Responsibility Schedule]] — responsibilities for AlistraGIS-hosted, dedicated and customer-selected hosting.
-4. [[02 Software and SaaS Licence Agreement]] — licence grant/use restrictions and software-specific terms.
-5. [[01 Standard Terms and Conditions]] — general commercial terms.
-6. [[03 Service Level Agreement]] — support/service targets.
-7. Signed Data Processing Agreement based on [[DPA Requirements]] where required.
+4. [[17 Customer Data Processing Agreement]] — execution-ready working DPA draft for customer-controller / AlistraGIS-processor arrangements, subject to solicitor review.
+5. [[02 Software and SaaS Licence Agreement]] — licence grant/use restrictions and software-specific terms.
+6. [[01 Standard Terms and Conditions]] — general commercial terms.
+7. [[03 Service Level Agreement]] — support/service targets.
 
 Existing supporting customer documents:
 
@@ -41,6 +41,7 @@ Existing supporting customer documents:
 - [[DPIA]]
 - [[Data Subject Rights Procedure]]
 - [[12 Data Protection Complaints Procedure]]
+- [[17 Customer Data Processing Agreement]]
 - [[DPA Requirements]]
 - [[GDPR Responsibilities]]
 - [[Data Breach and Incident Response]]
@@ -49,6 +50,7 @@ Existing supporting customer documents:
 ## Commercial and pricing documents
 
 - [[Client Pricing Pack]] — modular working price book covering modules, seat bands, projects, hosting, support, onboarding, API/AI and examples.
+- [[Client Quote Template]] — reusable customer quote structure.
 - [[Pricing Models]]
 - [[Hosting Options]]
 - [[Maintenance and Upgrades]]
@@ -72,16 +74,15 @@ The current application/legal drafts identify Alistra GIS Ltd and company number
 ## Current professional-review priorities - 8 September 2026
 
 1. Review/finalise [[13 Client Framework Agreement]] and its order/schedule structure.
-2. Produce/finalise an execution-ready customer DPA from [[DPA Requirements]].
-3. Controller/processor analysis across AlistraGIS-hosted and customer-hosted models.
-4. Liability caps/exclusions and operational-verification wording for infrastructure GIS.
-5. Approved retention periods and erasure/minimisation treatment for audit, support, workforce and backup records.
-6. Subprocessor/region/international-transfer review, including verification of documented Storage location.
-7. DPIA review and change triggers for new sectors/AI/location functionality.
-8. Incident/breach and statutory data-protection complaint handling obligations.
-9. Privacy Notice/cookie publication review against actual production configuration.
-10. Third-party map/geocoding/API commercial licensing.
-11. Validate [[Client Pricing Pack]] margin, hosting allowances, VAT treatment and discount authority.
+2. Review/finalise [[17 Customer Data Processing Agreement]] and controller/processor allocation across hosting models.
+3. Liability caps/exclusions and operational-verification wording for infrastructure GIS.
+4. Approved retention periods and erasure/minimisation treatment for audit, support, workforce and backup records.
+5. Subprocessor/region/international-transfer review, including verification of documented Storage location.
+6. DPIA review and change triggers for new sectors/AI/location functionality.
+7. Incident/breach and statutory data-protection complaint handling obligations.
+8. Privacy Notice/cookie publication review against actual production configuration.
+9. Third-party map/geocoding/API commercial licensing.
+10. Validate [[Client Pricing Pack]] margin, hosting allowances, VAT treatment and discount authority.
 
 ## Technical status relevant to legal review
 
@@ -94,8 +95,8 @@ The principal remaining technical gap is **retention enforcement and unified per
 1. Read [[00 Solicitor Review Pack 2026-09-07]].
 2. Read [[16 UK Compliance Action Register 2026-09-08]].
 3. Read [[2026-09-07 Red Item Remediation Update]] for current implementation evidence.
-4. Review [[13 Client Framework Agreement]], [[14 Client Order Form and Service Schedule]] and [[15 Hosting and Data Responsibility Schedule]] as one contract system.
-5. Review SaaS Licence, Standard Terms, DPA requirements and SLA together.
+4. Review [[13 Client Framework Agreement]], [[14 Client Order Form and Service Schedule]], [[15 Hosting and Data Responsibility Schedule]] and [[17 Customer Data Processing Agreement]] as one contract system.
+5. Review SaaS Licence, Standard Terms and SLA together with the Framework stack.
 6. Review privacy/data-protection pack and approve/adjust retention, processor and transfer positions.
 7. Review infrastructure liability and insurance alignment.
 8. Review [[Client Pricing Pack]] alongside accountant/margin assumptions.
