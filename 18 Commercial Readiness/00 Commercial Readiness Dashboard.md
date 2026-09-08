@@ -1,7 +1,7 @@
 ---
 status: draft
 updated: 2026-09-08
-related: ["[[Current State Validation 2026-08-08]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]", "[[2026-09-07 Red Item Remediation Update]]", "[[12 Data Protection Complaints Procedure]]", "[[13 Client Framework Agreement]]", "[[Client Pricing Pack]]", "[[16 UK Compliance Action Register 2026-09-08]]"]
+related: ["[[Current State Validation 2026-08-08]]", "[[Cost and Abuse Protection]]", "[[04 Data Retention Schedule]]", "[[05 Subprocessor Register]]", "[[06 DPIA]]", "[[07 Data Subject Rights Procedure]]", "[[18 DPA Requirements]]", "[[17 Customer Data Processing Agreement]]", "[[19 API Licence Requirements]]", "[[Stage 20 Backup Implementation]]", "[[Stage 21 Restore Test]]", "[[09 Disaster Recovery Plan]]", "[[2026-09-07 Red Item Remediation Update]]", "[[12 Data Protection Complaints Procedure]]", "[[13 Client Framework Agreement]]", "[[Client Pricing Pack]]", "[[16 UK Compliance Action Register 2026-09-08]]"]
 ---
 
 # Commercial Readiness Dashboard
@@ -19,14 +19,14 @@ This folder does not replace the existing legal, security, infrastructure or arc
 | 15 | [[05 Subprocessor Register]] | Amber - verification pending | Providers identified from implementation; live DPA/region/log-retention/transfer checks remain. |
 | 16 | [[06 DPIA]] | Amber - professional review | Privacy risks assessed and backup/restore evidence updated; legal/privacy review remains required. |
 | 17 | [[Data Subject Rights Procedure]] | Amber - tooling pending | Procedure updated for current 2026 timing/search rules; partial deletion/export capability exists. Unified per-person tooling and mock SAR remain. |
-| 18 | [[DPA Requirements]] | Solicitor review | Engineering requirements prepared; final execution-ready DPA requires solicitor input. |
+| 18 | [[17 Customer Data Processing Agreement]] + [[DPA Requirements]] | Draft created / solicitor review | Article 28-style customer DPA draft now exists and is linked to the Framework/hosting schedules. Final legal wording, role allocation, subprocessor/transfer facts and retention still require review. |
 | 19 | [[API Licence Requirements]] | Solicitor review | API licence requirements prepared; final commercial/legal terms require review. |
 | 20 | [[Stage 20 Backup Implementation]] | Complete | Firestore PITR/daily backups and a verified daily append-only Storage mirror are live. |
 | 21 | [[Stage 21 Restore Test]] | Passed | Isolated restore completed in 10m 27.893s; data/index/security checks passed and the temporary target was removed. |
 | 22 | [[09 Disaster Recovery Plan]] | Implemented / drills pending | Recovery priorities and failure scenarios documented; wider frontend/Storage/cutover drills and deputy assignment remain before pilot. |
 | 23 | [[Data Breach and Incident Response]] | Drafted / exercise pending | Operational runbook exists. Incident owner/deputy, live register, contact verification and tabletop exercise remain. |
 | 24 | [[12 Data Protection Complaints Procedure]] | Procedure added / implementation pending | Statutory complaints process documented. Support/in-app intake category, owner/deputy and end-to-end test remain. |
-| 25 | [[13 Client Framework Agreement]] + [[14 Client Order Form and Service Schedule]] + [[15 Hosting and Data Responsibility Schedule]] | Drafted / solicitor review | Modular contract system now covers modules, seats, projects, hosting, implementation, support and data responsibilities. Liability/dispute/DPA wording requires professional review. |
+| 25 | [[13 Client Framework Agreement]] + [[14 Client Order Form and Service Schedule]] + [[15 Hosting and Data Responsibility Schedule]] | Drafted / solicitor review | Modular contract system now covers modules, seats, projects, hosting, implementation, support and data responsibilities. Liability/dispute wording requires professional review. |
 | 26 | [[Client Pricing Pack]] + [[Client Quote Template]] | Working commercial model | Draft prices now cover core platform, modules, seat bands, projects, hosting, support, onboarding and API/AI. Margin and cloud-cost validation remain before public release. |
 | UK compliance register | [[16 UK Compliance Action Register 2026-09-08]] | Live working register | Separates required, incomplete and not-currently-required controls; ICO fee and company website disclosure remain external actions. |
 | Commercial billing architecture | [[Commercial Allocation Billing Architecture]] | Awaiting live test | Money-out chain complete and deployed. One real allocation taken through to a paid invoice on live Firebase remains; money in is not started. |
@@ -34,6 +34,8 @@ This folder does not replace the existing legal, security, infrastructure or arc
 ## 8 September 2026 legal/commercial update
 
 The Vault now includes a modular client contract stack and a working commercial price book. The Framework Agreement is designed to remain stable while each Order Form captures the customer's selected modules, user count, project capacity, hosting model, support level, implementation work and price.
+
+The contract stack now also includes [[17 Customer Data Processing Agreement]], so the customer-controller / AlistraGIS-processor requirements have moved from a requirements-only document to an actual draft schedule for solicitor redline.
 
 The new Hosting/Data Responsibility Schedule separates Supplier-managed shared hosting, Supplier-managed dedicated hosting and customer-selected/customer-hosted models. It explicitly records that Firebase/GCP is the current production-supported hosting path and that Azure/AWS/PostGIS customer-hosted deployment remains subject to customer-specific provisioning and technical validation.
 
@@ -53,7 +55,7 @@ The storage-profile model contains `backupPolicy.retentionDays`, `dataPolicy.ret
 
 The largest remaining legal/engineering issues are now:
 
-1. final execution-ready DPA and solicitor redline of the framework/licence/terms;
+1. solicitor redline/approval of the Framework, DPA, SaaS Licence and Standard Terms;
 2. approved retention periods plus retention enforcement;
 3. unified/tested per-person DSAR workflow;
 4. live subprocessor region/log/DPA/transfer verification;
@@ -65,4 +67,4 @@ The largest remaining legal/engineering issues are now:
 
 For a controlled pilot, the current Supplier-managed hosting path and tightly scoped/test-data-first approach remain preferable until customer-hosted acceptance and final privacy/contract points are closed.
 
-Final retention periods, controller/processor allocation, transfer mechanisms, DPA wording and liability terms remain matters for professional legal/privacy review. They must not be marked complete merely by changing documentation or inventing policy values in code.
+Final retention periods, controller/processor allocation, transfer mechanisms, liability caps and key negotiated terms remain matters for professional legal/privacy review. They must not be marked complete merely by changing documentation or inventing policy values in code.
