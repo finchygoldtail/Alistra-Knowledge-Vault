@@ -1,168 +1,154 @@
 ---
-status: draft
-updated: 2026-08-08
+status: implementation-requirements-complete-draft-created
+updated: 2026-09-08
 stage: 18
-related: ["[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Subprocessor Register]]", "[[DPIA]]", "[[Data Subject Rights Procedure]]", "[[01 Standard Terms and Conditions]]", "[[02 Software and SaaS Licence Agreement]]"]
+related: ["[[17 Customer Data Processing Agreement]]", "[[03 GDPR Data Register]]", "[[Data Retention Schedule]]", "[[Subprocessor Register]]", "[[DPIA]]", "[[Data Subject Rights Procedure]]", "[[12 Data Protection Complaints Procedure]]", "[[13 Client Framework Agreement]]", "[[15 Hosting and Data Responsibility Schedule]]"]
 ---
 
 # DPA Requirements
 
-Stage 18 of the commercial go-live programme. This document defines the requirements for a customer Data Processing Agreement for AlistraGIS. It is not the final DPA and must be reviewed or drafted by a UK technology solicitor before commercial execution.
+Stage 18 of the commercial go-live programme. This document records the requirements used to build [[17 Customer Data Processing Agreement]]. The DPA draft now exists, but it remains subject to UK technology/privacy solicitor review before commercial signature.
 
-## Files reviewed for this stage
+## Current position — 8 September 2026
 
-| File | Why it was reviewed | Result |
-|---|---|---|
-| `Alistra Knowledge Vault/12 Licensing and Legal/01 Standard Terms and Conditions.md` | Existing data-protection and DPA references | Existing terms already say a DPA is needed where supplier processes personal data for the customer. |
-| `Alistra Knowledge Vault/12 Licensing and Legal/02 Software and SaaS Licence Agreement.md` | Existing licence obligations | Existing licence references hosting model, backups, exit/export and retention but not a standalone DPA. |
-| `Alistra Knowledge Vault/12 Licensing and Legal/03 GDPR Data Register.md` | Processing categories | Supplies data categories and controller/processor assumptions. |
-| `Alistra Knowledge Vault/12 Licensing and Legal/Data Retention Schedule.md` | Return/deletion/backup requirements | Supplies current retention and enforcement gaps. |
-| `Alistra Knowledge Vault/12 Licensing and Legal/Subprocessor Register.md` | Subprocessor and transfer requirements | Supplies provider list and unresolved DPA/region checks. |
-| `fibre-gis/functions/src/storage/storageAccess.ts` and `storageHttpApi.ts` | Technical tenant/security controls | Confirms tenant-scoped access helpers and bearer-token API pattern. |
+**Requirement definition:** substantially complete.  
+**Execution-ready legal document:** draft created, solicitor review required.  
+**Technical/privacy dependencies:** retention, live subprocessor/provider verification, DSAR tooling and final controller/processor allocation remain partly open.
 
-## Required Parties and Roles
+## Core Article 28 requirement set
 
-The DPA should identify:
+The customer DPA must accurately include:
 
-- AlistraGIS / supplier legal entity details;
-- customer legal entity details;
-- whether the customer is controller, processor or joint controller for each data set;
-- AlistraGIS's role as processor for customer project/workforce/evidence data;
-- AlistraGIS's controller role for its own account, support, licence and administrative data, if applicable.
+- subject matter and duration of processing;
+- nature and purpose of processing;
+- types of personal data;
+- categories of data subject;
+- Controller obligations and rights;
+- processing only on documented Controller instructions unless law requires otherwise;
+- confidentiality obligations;
+- appropriate technical and organisational security measures;
+- Subprocessor authorisation and equivalent contractual protections;
+- assistance with data-subject rights;
+- assistance with security, breach, DPIA and prior-consultation obligations where applicable;
+- return/deletion of personal data at end of processing, subject to lawful retention and protected backup cycles;
+- information needed to demonstrate compliance; and
+- audits/inspections.
 
-## Processing Instructions
+These requirements are now reflected in [[17 Customer Data Processing Agreement]].
 
-The DPA should state that AlistraGIS processes customer personal data only:
+## Role allocation
 
-- to provide, secure, support and improve the contracted service;
-- according to documented customer instructions;
-- according to the agreed SaaS licence/order form;
-- where required by law, with notice where lawful.
+Working model for solicitor confirmation:
 
-## Subject Matter and Data Categories
+- Customer normally Controller for its project/workforce/evidence/operational personal data;
+- AlistraGIS normally Processor for that data where it hosts/processes it to supply the service;
+- AlistraGIS may separately be Controller for its own account administration, security, support, licence/billing, supplier and business-management records.
 
-The DPA should cross-reference [[03 GDPR Data Register]] and cover:
+The hosting model does not alone decide the role. Customer-hosted infrastructure can change the processor/subprocessor chain without automatically removing AlistraGIS processor obligations.
+
+## Processing scope
+
+The DPA/Order Form should cover only processing actually enabled for the customer, potentially including:
 
 - user accounts, names, emails, roles and user IDs;
-- project, map, operational and audit data;
-- photographs, files and site evidence;
-- support tickets and ticket events;
-- employee/credential data where customers use those modules;
-- FRIDAY AI inputs and outputs if enabled;
-- licence/billing metadata.
+- project/map/operational data;
+- audit/change records;
+- photographs/files/site evidence;
+- support/complaint/rights-request information;
+- employee/credential information where those modules are used;
+- AI inputs/context only where contractually enabled and provider checks are complete;
+- licence/billing metadata where AlistraGIS processes it as Controller rather than Processor.
 
-## Data Subjects
+## Security requirements
 
-Likely data subjects:
+The DPA should point to actual controls, including where relevant:
 
-- customer employees and contractors;
-- AlistraGIS administrators/support contacts;
-- field workers;
-- build partners;
-- individuals incidentally visible in photos/site evidence;
-- individuals associated with support or account requests.
+- Firebase Authentication and role-based access;
+- tenant isolation/business scoping;
+- server-side authorisation for privileged operations;
+- Firestore/Storage rules;
+- security/audit logging;
+- secret management;
+- backup/restore controls;
+- incident response;
+- least-privilege administration;
+- secure development/regression testing.
 
-## Security Requirements
+Do not promise certifications such as ISO 27001 or Cyber Essentials unless actually achieved.
 
-The DPA should require appropriate technical and organisational measures, including:
+## Subprocessors and transfers
 
-- Firebase Authentication and role-based access controls;
-- tenant isolation by business/customer;
-- server-side authorisation for privileged writes;
-- Firestore and Storage security rules;
-- server-stamped audit logs for security-critical events;
-- secret storage outside source code;
-- backup and restore controls;
-- incident response and breach notification process;
-- least-privilege administrative access;
-- secure development and regression testing for permissions.
+The DPA must link to the current [[Subprocessor Register]] and state:
 
-## Subprocessors
+- authorisation mechanism;
+- customer notice process for additions/replacements;
+- objection/remedy process;
+- equivalent flow-down obligations;
+- international-transfer safeguards where needed.
 
-The DPA should incorporate or link the [[Subprocessor Register]] and define:
+Live region/DPA/log-retention/transfer verification remains outstanding for relevant providers before final customer residency promises are made.
 
-- current approved subprocessors;
-- how customers are notified of new subprocessors;
-- objection process and timeline;
-- flow-down confidentiality/security/data-protection obligations;
-- international-transfer safeguards.
+## Rights and complaint assistance
 
-## International Transfers
+The DPA must support:
 
-The DPA should require the relevant UK GDPR transfer mechanism for any processing outside the UK or approved jurisdictions, including SCCs/UK addendum or provider-specific DPA mechanisms as applicable.
+- [[Data Subject Rights Procedure]] for access/correction/erasure/restriction/objection/portability; and
+- [[12 Data Protection Complaints Procedure]] for complaints concerning customer-controlled data.
 
-Exact provider locations and transfer safeguards must be confirmed for Firebase/GCP, Vercel, NVIDIA, CARTO/OpenStreetMap/Nominatim and any customer-selected Azure/AWS storage provider.
+The Customer remains responsible for Controller decisions where it is Controller; AlistraGIS assists according to the DPA.
 
-## Data Subject Rights Support
+## Breach notification
 
-The DPA should require AlistraGIS to assist the customer/controller with:
+The DPA draft now uses **without undue delay** as the baseline Customer notification obligation after AlistraGIS becomes aware of a breach affecting Customer Personal Data.
 
-- access;
-- correction;
-- deletion/erasure;
-- restriction;
-- objection;
-- portability where applicable;
-- locating data across Auth, Firestore, Storage, support tickets, logs and backups.
+A shorter contractual target should be inserted only after confirming it can be operationally met and after solicitor review.
 
-The operational detail should cross-reference [[Data Subject Rights Procedure]].
+## Deletion, return and retention
 
-## Breach Notification
+The DPA must work with [[Data Retention Schedule]] and the selected hosting model to define:
 
-The DPA should define:
+- export/return rights;
+- deletion/return at service end;
+- protected backup cycle;
+- lawful-retention exceptions;
+- audit/security record handling;
+- customer-hosted deletion responsibilities.
 
-- what counts as a personal data breach;
-- how incidents are reported internally;
-- notification route to the customer;
-- target notification timeline after becoming aware;
-- information to be supplied;
-- cooperation duties;
-- evidence preservation and post-incident review.
+Retention configuration fields are not sufficient unless operational enforcement/process exists.
 
-Final timing and wording must be solicitor-approved and aligned with [[Data Breach and Incident Response]] once Stage 23 is complete.
+## Audit and assurance
 
-## Deletion, Return and Retention
+The DPA draft uses a staged assurance model:
 
-The DPA should cross-reference [[Data Retention Schedule]] and define:
+1. existing documentation/evidence;
+2. written questions;
+3. remote review;
+4. deeper/on-site inspection where reasonably necessary.
 
-- customer export rights before termination;
-- deletion or return of customer data after termination;
-- backup retention/expiry;
-- legal-hold exceptions;
-- handling of audit/security logs;
-- customer-hosted versus Alistra-managed storage responsibilities.
+Final frequency, notice and cost allocation require solicitor review.
 
-## Audit and Assurance
-
-The DPA should define what evidence AlistraGIS can provide:
-
-- security architecture summary;
-- current-state validation;
-- security test results;
-- backup/restore evidence;
-- subprocessor register;
-- incident-response process;
-- external pen-test summary once available.
-
-The DPA should avoid promising ISO 27001 or other certifications unless actually achieved or contractually committed.
-
-## Assistance and Liability Boundaries
-
-The DPA should make clear:
-
-- customer is responsible for the data it chooses to upload and its own lawful basis/retention instructions;
-- customer administrators are responsible for role assignment and ordinary-user access within their business;
-- AlistraGIS is responsible for platform security controls under its control;
-- customer-hosted deployments may shift backup, storage, region and infrastructure responsibilities to the customer.
-
-## Open Items Before Solicitor Review
+## Current open items
 
 | ID | Requirement | Status |
 |---|---|---|
-| DPA-01 | Confirm supplier legal entity and contact details | Required |
-| DPA-02 | Confirm final controller/processor split | Required |
-| DPA-03 | Confirm subprocessors, regions, DPAs and transfer mechanisms | Required |
-| DPA-04 | Finalise retention periods and backup expiry | Required |
-| DPA-05 | Complete incident-response and breach procedure | Required |
-| DPA-06 | Complete backup/restore evidence | Required |
-| DPA-07 | Prepare solicitor review pack containing this document plus the linked registers | Required |
+| DPA-01 | Supplier legal identity/company number | Complete — Alistra GIS Ltd / 17361925 |
+| DPA-02 | Registered office/legal-notice address | Required before signature/publication |
+| DPA-03 | Final controller/processor split | Solicitor/privacy review |
+| DPA-04 | Subprocessors, regions, DPAs and transfer mechanisms | Live verification required |
+| DPA-05 | Final retention periods and enforcement | Required |
+| DPA-06 | Incident-response process | Drafted; tabletop/owner/deputy pending |
+| DPA-07 | Backup/restore evidence | Complete for current evidenced scope |
+| DPA-08 | Customer DPA document | Draft created — [[17 Customer Data Processing Agreement]] |
+| DPA-09 | Customer-hosted responsibility model | Draft created — [[15 Hosting and Data Responsibility Schedule]]; technical validation pending |
+| DPA-10 | Solicitor redline/approval | Required before commercial signature |
+
+## Professional review questions
+
+1. Is the default Controller/Processor split correct across each hosting model?
+2. Is general Subprocessor authorisation appropriate, and what notice/objection period should apply?
+3. Does the audit clause appropriately balance Article 28 rights with multi-tenant security/confidentiality?
+4. Should there be a separate/higher liability cap for data-protection/confidentiality matters?
+5. What transfer language is needed once provider regions/mechanisms are verified?
+6. What retention/deletion exceptions should apply to security/audit, backup and dispute records?
+7. Should the DPA impose a specific contractual processor-to-controller breach notification target shorter than "without undue delay"?
+8. Are any additional terms needed for workforce data, photographs, infrastructure records or future AI processing?
