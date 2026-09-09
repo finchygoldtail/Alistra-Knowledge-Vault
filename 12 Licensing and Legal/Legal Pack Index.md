@@ -50,6 +50,9 @@ Existing supporting customer documents:
 ## Commercial and pricing documents
 
 - [[Client Pricing Pack]] — modular working price book covering modules, seat bands, projects, hosting, support, onboarding, API/AI and examples.
+- [[Module and Seat Ready Reckoner]] — the full price matrix by module and user count, for quoting without rebuilding the arithmetic.
+- [[Data Licensing and Custody Options]] — prices the DATA rather than the software: the three custody models, storage, migration in, export out, retention, exit and third-party data.
+- [[First Client Offer 2026]] — the discounted first-customer structure, what it covers, what is traded for it, and worked examples across all three custody models.
 - [[Client Quote Template]] — reusable customer quote structure.
 - [[Pricing Models]]
 - [[Hosting Options]]
@@ -61,7 +64,8 @@ Existing supporting customer documents:
 - [[10 Third Party Licence Register]]
 - [[11 THIRD_PARTY_NOTICES]]
 - [[API Licence Requirements]]
-- [[Data Ownership]]
+- [[Data Ownership]] — full ownership position by data category, the licence AlistraGIS takes, AI, third-party data and exit. Written out 10 September 2026.
+- [[Intellectual Property]] — what AlistraGIS owns, what the customer licenses, customer suggestions, bespoke work, escrow and indemnity. Written out 10 September 2026.
 - [[Licensing Options]]
 - [[Intellectual Property Index]]
 
@@ -70,6 +74,22 @@ Existing supporting customer documents:
 Replace all placeholders in square brackets, including legal business name and trading name, company number and registered office, VAT number if registered, contact/legal-notice addresses, data-protection contact, pricing/payment/support terms, hosting model/subprocessors, insurance/liability caps and governing-law/dispute choices.
 
 The current application/legal drafts identify Alistra GIS Ltd and company number 17361925, but the registered-office disclosure remains unresolved because the currently documented address is private residential. This must be resolved before commercial website publication if the business does not want the home address displayed.
+
+## Framework agreement pack - 10 September 2026
+
+A consolidated, standalone version of this pack was assembled for solicitor and client use, on the Desktop as `AlistraGIS Framework Agreement Pack 2026-09-10`.
+
+28 documents with Obsidian frontmatter and wikilinks stripped so they read as documents rather than notes, plus a combined printable HTML version and a written solicitor instruction carrying fifteen specific questions.
+
+**The vault remains the source of truth.** The Desktop pack is generated from it - edit here and regenerate, or the next build overwrites the change.
+
+Gaps that block issuing anything from it, in priority order:
+
+1. **Registered office is a private residential address** - unresolved, and it appears on the contract.
+2. Placeholders in square brackets throughout.
+3. Liability caps not set, and not yet checked against the insurance actually held.
+4. Customer-hosted (Model C) must not be sold as live - still fail-closed, re-confirmed 10 September 2026.
+5. No competitor price benchmarking has been done.
 
 ## Current professional-review priorities - 8 September 2026
 
