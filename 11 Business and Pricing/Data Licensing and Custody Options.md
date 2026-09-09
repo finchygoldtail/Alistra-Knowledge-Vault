@@ -227,6 +227,7 @@ Assumes Core Platform plus QA & Audits, Operations & Production and Work Packs, 
 | Recurring per month, list | £2,550 | £3,400 | £3,000 |
 | Year 1 recurring after annual prepay discount | £27,540 | £36,720 | £32,400 |
 | One-off setup / activation | £1,500 | £4,000 | £6,000 |
+| *Model C excludes discovery* | — | — | *add £1,800 for 2 days* |
 | **Year 1 total** | **£29,040** | **£40,720** | **£38,400** |
 | Years 2 and 3 each | £27,540 | £36,720 | £32,400 |
 | **Three-year total** | **£84,120** | **£114,160** | **£103,200** |

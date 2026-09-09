@@ -182,7 +182,7 @@ The three-year comparison is a strong close:
 | | Model A | Model B | Model C |
 |---|---:|---:|---:|
 | Year one with first-customer pricing | £27,510 | £38,680 | From £38,400 + cloud |
-| Three-year total | £82,590 | £112,120 | £101,400 + cloud |
+| Three-year total | £82,590 | £112,120 | £103,200 + cloud |
 
 ## 10. Offer validity and protection
 
