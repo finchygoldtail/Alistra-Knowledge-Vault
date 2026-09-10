@@ -106,6 +106,7 @@ The customer provides its own Azure, AWS or PostgreSQL/PostGIS environment. Alis
 | Architecture / security discovery | **£900 per day** |
 | Complex networking, private endpoints, SSO, bespoke backup, HA/DR | **Quoted — not included** |
 | Data migration into the customer environment | **£850 per day** |
+| Formal acceptance testing of the environment | **£900 per day**, typically 2 days |
 
 ### The honest position, which must be stated in writing
 
@@ -136,6 +137,7 @@ The single biggest practical obstacle to a first client is their existing data, 
 | Bulk design pack import — medium (5,000–25,000 assets) | **£3,400 fixed (4 days)** |
 | Bulk design pack import — large (25,000+ assets) | **Quoted after a paid data assessment** |
 | Data assessment and import plan | **£900 one day, credited against the migration if it proceeds** |
+| Data validation testing after import | **£850 per day** |
 
 **Always quote the assessment first for anything beyond a couple of clean files.** Fixed-price migration on unseen data is how a project loses money.
 
@@ -197,6 +199,8 @@ Confirmed figures, replacing the placeholders previously in [[Maintenance and Up
 | Enterprise / Extended Support | **From £1,250 per month** |
 | Customer-requested change or enhancement | **£900 per day** |
 | Integration / API engineering | **£900 per day** |
+| Regression testing after a bespoke change | **20% of the change cost**, minimum half a day |
+| Acceptance or integration testing | **£900 per day** |
 | Out-of-scope engineering | **£150 per hour**, minimum 2 hours |
 | Agreed out-of-hours emergency work | **£250 per hour**, minimum 2 hours, by prior written agreement only |
 

@@ -1,7 +1,7 @@
 ---
 title: Map Performance Work 2026-09-10
 type: feature
-status: shipped-frontend-backend-pending
+status: shipped
 owner: Alistair
 created: 2026-09-10
 updated: 2026-09-10
@@ -11,7 +11,7 @@ related: ["[[Maintenance and Upgrades]]", "[[Hosting Options]]", "[[Data Licensi
 
 # Map Performance Work — 10 September 2026
 
-> Frontend is live. **The Cloud Functions half is not yet deployed** — see section 7.
+> **Live in production, both halves, as of 10 September 2026.**
 
 ## 1. The complaint
 
@@ -73,9 +73,14 @@ Tests: **1,353 pure tests and 34 emulator tests, all passing.**
 
 **Asset geometry is not GeoJSON.** `geometry.coordinates` is stored `[latitude, longitude]`, the reverse of the GeoJSON standard, and every reader in the codebase expects that. Any importer, exporter or future PostGIS migration that trusts the field name will silently relocate the entire network into the Indian Ocean. This is the concrete form of the geometry risk flagged in the PostGIS audit.
 
-## 7. Outstanding — deploy the backend
+## 7. Deployment — done
 
-The frontend is live. Until the functions are deployed, the client attempts the patch, gets an error, logs it and falls back to a full reload. **Nothing is broken; the second half of the benefit is simply not switched on yet.**
+Frontend shipped via `git push origin main` (Vercel, commit `a735a6f`). Backend deployed by name on 10 September:
+
+- `loadCompanyMapAssetsByIds` — created
+- `saveCompanyMapAssets`, `loadCompanyMapAssets`, `upsertCompanyMapAsset`, `deleteCompanyMapAsset` — updated
+
+Both verified live and correctly refusing unauthenticated calls. **The patching path is now switched on for real customers.**
 
 ```
 npx firebase-tools deploy --only "functions:loadCompanyMapAssetsByIds,functions:saveCompanyMapAssets,functions:loadCompanyMapAssets,functions:upsertCompanyMapAsset,functions:deleteCompanyMapAsset" --project fibre-gis-v2

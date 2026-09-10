@@ -200,6 +200,11 @@ For enhanced hours, operational escalation, dedicated review meetings or bespoke
 | Bespoke software development | **£900/day** |
 | Architecture/security/customer-hosted discovery | **£900/day** |
 | Emergency/out-of-scope engineering | **£150/hour**, minimum 2 hours, only where agreed |
+| Additional UAT support and test-script preparation | **£650/day** |
+| Formal acceptance testing (customer-hosted environment) | **£900/day**, typically 2 days |
+| Data validation testing after migration | **£850/day** |
+| Regression testing after a bespoke change | **20% of the change cost**, minimum half a day |
+| Customer-witnessed / factory acceptance testing | **£750/day + reasonable travel** |
 
 ### Standard onboarding includes
 
@@ -211,6 +216,12 @@ For enhanced hours, operational escalation, dedicated review meetings or bespoke
 - go-live checklist.
 
 Large data migration, custom integrations and bespoke workflow changes are excluded unless quoted.
+
+### Testing
+
+Up to two user acceptance testing sessions are included in standard onboarding. Beyond that, testing is chargeable at the rates above.
+
+Testing AlistraGIS's own work is never charged for: a defect in delivered functionality is fixed and re-tested at no cost, and the automated suites gating every release are part of maintenance. The customer pays only for testing of their own environment, data, integrations or a change they commissioned. See [[Maintenance and Upgrades]] section 4.
 
 ## 10. API and AI pricing
 

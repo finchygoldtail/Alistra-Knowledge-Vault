@@ -74,7 +74,47 @@ This is the section customers ask about once they are live and want something ch
 
 A change under half a day may be absorbed at AlistraGIS's discretion where it is genuinely trivial and benefits the product generally. Do not make this a written entitlement — it becomes an expectation of unlimited free work.
 
-## 4. Where a change belongs to the roadmap instead
+## 4. Testing and acceptance
+
+Testing is chargeable work and should be quoted, not absorbed. It is also the
+thing that protects both sides when a customer says "this isn't what we asked
+for".
+
+| Testing service | Price |
+|---|---:|
+| User acceptance testing support during onboarding | **Included** — up to 2 sessions |
+| Additional UAT support and test-script preparation | **£650 per day** |
+| Formal acceptance testing of a customer-hosted environment | **£900 per day**, typically 2 days |
+| Data validation testing after a migration | **£850 per day** |
+| Regression testing after a bespoke change | **20% of the change cost**, minimum half a day |
+| Integration testing with a customer system | **£900 per day** |
+| Customer-witnessed or factory acceptance testing | **£750 per day** plus reasonable travel |
+| Penetration test or security assessment by a third party | **At cost plus 15%**, arranged on request |
+
+### What is never charged for
+
+Testing AlistraGIS's own work is AlistraGIS's cost. A defect found in delivered
+functionality is fixed and re-tested at no charge, and the automated suites that
+gate every release are part of maintenance. **The customer pays only for testing
+of their own environment, their own data, their own integrations, or a change
+they commissioned.**
+
+### Why regression testing is priced as a percentage
+
+A bespoke change to a platform this interconnected can affect things nobody
+asked to change. The 20% covers re-running the relevant checks and proving the
+rest of the customer's configuration still behaves. Quoting a change without it
+means either absorbing that cost or skipping the work, and skipping it is how a
+paid change breaks something that was already working.
+
+### Acceptance testing is not optional for customer-hosted
+
+For Model C, the acceptance checklist in the Hosting and Data Responsibility
+Schedule must pass before production data is loaded. Quote the testing days
+alongside the implementation fee -- a customer who has not budgeted for
+acceptance will push to skip it, which is exactly when it matters most.
+
+## 5. Where a change belongs to the roadmap instead
 
 If a requested change improves the product for every customer, it may be better taken as roadmap work at no charge, in exchange for the customer accepting AlistraGIS's timescale rather than theirs.
 
@@ -82,7 +122,7 @@ The rule: **the customer pays for control of timing and specification.** If they
 
 Never write a roadmap item into an Order Form as a contractual deliverable with a date unless it is being paid for and has an acceptance test.
 
-## 5. How releases actually reach customers
+## 6. How releases actually reach customers
 
 Two independent pipelines, with different risk profiles. Anyone doing maintenance needs to know which is which.
 
@@ -100,7 +140,7 @@ Because the frontend auto-deploys and the backend does not, **a release can be h
 - `node scripts/run-emulator-integration-tests.mjs` for anything touching storage
 - `npm run build`
 
-## 6. Planned maintenance and notice
+## 7. Planned maintenance and notice
 
 - Routine updates ship without downtime and without individual notice.
 - Where downtime is genuinely required, give **5 working days' notice** and schedule outside UK working hours.
@@ -108,11 +148,11 @@ Because the frontend auto-deploys and the backend does not, **a release can be h
 
 State these in the Order Form so "you changed it without telling us" is answered by the contract.
 
-## 7. Version and change records
+## 8. Version and change records
 
 Each customer's file should record: the software version at go-live, dated change requests with their estimates and approvals, any bespoke work and who owns the resulting IP (AlistraGIS, per [[Intellectual Property]], unless the Order Form says otherwise), and dated support-tier changes.
 
-## 8. Before this is used commercially
+## 9. Before this is used commercially
 
 - [ ] Reconcile the response targets here with [[03 Service Level Agreement]] so the two documents state the same numbers.
 - [ ] Confirm the day rates against realistic delivery capacity, not aspiration.
